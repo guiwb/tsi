@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS2</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>Sobre</li>
+                <li>Highlights</li>
+                <li>Rages</li>
+                <li>Cadastre-se</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about">
+            <article></article>
+        </section>
+
+        <section class="highlights">
+            <!-- Usar Drag N Drop -->
+            <!-- Vídeos -->
+            <h2>Ordene os videos:</h2>
+            <video controls width="200px">
+                <source src="https://youtu.be/JK0wFKrSJSE?si=aAQ_-Bly0NZm_THS" type="video/webm" />
+            </video>
+        </section>
+
+        <section class="rages">
+            <!-- Usar Drag N Drop -->
+            <!-- Audios -->
+            <h2>Organize os rages:</h2>
+        </section>
+
+        <section class="signup">
+            <!-- Salvar os dados na local storage -->
+            <!-- 3. Formulários com Novos Controles:
+• Crie um formulário com os novos elementos de entrada do HTML5, como:
+o color, date, time, email, number, range, url.
+• Defina restrições para os campos date e number usando os atributos min e max.
+4. Formulário de Cadastro:
+• Inclua no site um formulário de cadastro com os seguintes campos:
+o Nome, sobrenome, RG, CPF, e-mail, data de nascimento e cidade.
+• Use o elemento datalist para o campo de cidade, com pelo menos 5 opções de cidades.
+• Valide os campos nome e e-mail com o atributo required (obrigatório).
+• Utilize o atributo pattern em um dos campos para validar um padrão de entrada -->
+            <form action="">
+                <div>
+                    <label for="name">Nome:</label>
+                    <input id="name" type="text">
+                </div>
+
+                <div>
+                    <label for="last-name">Sobrenome:</label>
+                    <input id="last-name" type="text">
+                </div>
+
+                <div>
+                    <label for="rg">RG:</label>
+                    <input id="rg" type="text">
+                </div>
+
+                <div>
+                    <label for="cpf">CPF:</label>
+                    <input id="cpf" type="text">
+                </div>
+
+                <div>
+                    <label for="email">E-mail:</label>
+                    <input id="email" type="email">
+                </div>
+
+                <div>
+                    <label for="birthdate">Data de nascimento:</label>
+                    <input id="birthdate" type="date">
+                </div>
+
+                <div>
+                    <label for="city">Cidade:</label>
+                    <input list="city-options" id="city" name="city" />
+                    <datalist id="city-options">
+                        <option value="Pelotas" />
+                        <option value="Rio Grande" />
+                        <option value="Porto Alegre" />
+                        <option value="Canoas" />
+                        <option value="São Paulo" />
+                    </datalist>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        Bilu
+    </footer>
+</body>
+</html>
