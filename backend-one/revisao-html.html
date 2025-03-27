@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <form action="">
+        <h1>Cadastrar Produtos</h1>
+
+        <select id="category">
+            <option value="" disabled selected>Selecione a categoria</option>
+            <option value="1">Categoria 1</option>
+            <option value="2">Categoria 2</option>
+            <option value="3">Categoria 3</option>
+        </select>
+        
+        <br>
+
+        <input type="text" placeholder="Nome do produto"><br>
+        <input type="text" placeholder="Descrição do produto"><br>
+        <input type="number" min="1" placeholder="Quantidade"><br>
+
+        <h3>Tipo do produto:</h3>
+        <input type="radio" id="eletrodomestico" name="type"> 
+        <label for="eletrodomestico">Eletrodoméstico</label>
+
+        <input type="radio" id="moveis" name="type"> 
+        <label for="moveis">Móveis</label>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
