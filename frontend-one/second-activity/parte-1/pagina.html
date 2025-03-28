@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS2</title>
+
+    <link href='./assets/style.css' rel='stylesheet' />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">Sobre o CS2</a></li>
+                <li><a href="#highlights">Ordene os vídeos</a></li>
+                <li><a href="#rages">Escute o rage</a></li>
+                <li><a href="#signup">Responda às perguntas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="about">
+            <h2>Sobre o CS2</h2>
+            <p>Counter-Strike 2 (CS2) é a mais recente evolução da famosa franquia de jogos de tiro tático em primeira pessoa, desenvolvida pela Valve. Lançado como uma atualização gratuita do CS:GO, o jogo utiliza a engine Source 2, trazendo melhorias gráficas significativas, iluminação realista, efeitos de fumaça dinâmicos e um sistema de tick rate mais preciso, eliminando a dependência de servidores tradicionais. Além das novidades técnicas, o CS2 mantém a essência competitiva que consagrou a série, com modos clássicos como Competitivo, Casual e Wingman, além de introduzir novos mapas e ajustes de gameplay para aprimorar o equilíbrio e a estratégia. Com uma comunidade ativa e um cenário eSports consolidado, o jogo continua sendo um dos FPS mais influentes e populares do mundo.</p>
+        </section>
+
+        <section id="highlights" class="highlights">
+            <h2>Ordene os vídeos do Polex</h2>
+            <article>
+                <video draggable="true" controls width="200px">
+                    <source src="./assets/videos/video1.mp4" type="video/mp4" />
+                </video>
+
+                <video draggable="true" controls width="200px">
+                    <source src="./assets/videos/video2.mp4" type="video/mp4" />
+                </video>
+
+                <video draggable="true" controls width="200px">
+                    <source src="./assets/videos/video3.mp4" type="video/mp4" />
+                </video>
+            </article>
+        </section>
+
+        <section id="rages" class="rages">
+            <h2>Escuta só esse rage do Wave</h2>
+            <audio src="./assets/audios/rage_wave.webm" controls></audio>
+        </section>
+
+        <section id="signup" class="signup">
+            <h2>Responda às perguntas</h2>
+            <form method="get" onsubmit="save(event)">
+                <div>
+                    <label for="name">Nome:</label>
+                    <input id="name" type="text" name="name" required>
+                </div>
+
+                <div>
+                    <label for="last-name">Sobrenome:</label>
+                    <input id="last-name" name="last-name" type="text">
+                </div>
+
+                <div>
+                    <label for="rg">RG:</label>
+                    <input id="rg" name="rg" type="text">
+                </div>
+
+                <div>
+                    <label for="cpf">CPF:</label>
+                    <input id="cpf" name="cpf" type="text" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                </div>
+
+                <div>
+                    <label for="email">E-mail:</label>
+                    <input id="email" name="email" type="email" required>
+                </div>
+
+                <div>
+                    <label for="birthdate">Data de nascimento:</label>
+                    <input id="birthdate" name="birthdate" type="date" max="2008-01-01">
+                </div>
+
+                <div>
+                    <label for="quantity">Quantos dias da semana você costuma jogar CS?</label>
+                    <input id="quantity" name="quantity" type="number" min="0" max="7">
+                </div>
+
+                <div>
+                    <label for="city">Cidade:</label>
+                    <input list="city-options" id="city" name="city" />
+                    <datalist id="city-options">
+                        <option value="Pelotas" />
+                        <option value="Rio Grande" />
+                        <option value="Porto Alegre" />
+                        <option value="Canoas" />
+                        <option value="São Paulo" />
+                    </datalist>
+                </div>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        © Guilherme Barbosa
+    </footer>
+    
+    <script src='./assets/functions.js'></script>
+</body>
+
+</html>

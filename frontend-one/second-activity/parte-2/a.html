@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parte 2 - A</title>
+</head>
+<body>
+    <div>
+        <p>Parágrafo 1.</p>
+        <p> Parágrafo 2.</p>
+    </div>
+
+    <p> Parágrafo 3.</p>
+    <p> Parágrafo 4.</p>
+
+    <style>
+        div p {
+            color: red;
+        }
+
+        div > p {
+            color: yellow;
+        }
+
+        div + p {
+            color: green;
+        }
+
+        div ~ p {
+            color: purple;
+        }
+    </style>
+</body>
+</html>
