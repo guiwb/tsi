@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        function defineSexo(txt) {
+            let sexo = 0
+
+            while(sexo !== 1 && sexo !== 2) {
+                sexo = parseInt(prompt(`${txt} (1 - masculino ou  2 - feminino)`))
+                if (sexo !== 1 && sexo !== 2) alert("Digite um valor válido!")
+            }
+
+            return sexo
+        }
+
+        const pessoa1 = {
+            altura: prompt("Digite a altura da primeira pessoa"),
+            sexo: defineSexo("Digite o sexo da primeira pessoa")
+        }
+
+        const pessoa2 = {
+            altura: prompt("Digite a altura da segunda pessoa"),
+            sexo: defineSexo("Digite o sexo da segunda pessoa")
+        }
+
+        const pessoaMaior = pessoa1.altura > pessoa2.altura ? pessoa1 : pessoa2
+
+        alert(`A altura maior é de ${pessoaMaior.altura}cm e o sexo dessa pessoa é ${ pessoaMaior.sexo === 1 ? 'masculino' : 'feminino' }`)
+    </script>
+</body>
+</html>
