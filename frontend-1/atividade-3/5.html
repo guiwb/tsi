@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="paragrafo">Parágrafo</p>
+    <button id="botao">Esconder/Mostrar</button>
+
+    <script>
+        const botao = document.getElementById('botao')
+
+        botao.addEventListener('click', () => {
+            const paragrafo = document.getElementById('paragrafo')
+            paragrafo.style.display = paragrafo.style.display === 'none' ? 'block' : 'none'
+        })
+    </script>
+</body>
+</html>

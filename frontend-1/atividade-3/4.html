@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="colorBox">Conteúdo</div>
+    <input id="input" type="text">
+    <button id="botao">Colorir</button>
+
+    <script>
+        function alteraCor() {
+            const cor = document.getElementById('input').value
+            const colorBox = document.getElementById('colorBox')
+
+            colorBox.style.backgroundColor = cor
+        }
+
+        const botao = document.getElementById('botao')
+        botao.addEventListener('click', alteraCor)
+    </script>
+</body>
+</html>

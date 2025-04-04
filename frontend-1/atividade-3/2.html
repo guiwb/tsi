@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+
+    <button onclick="alteraCores()">Alterar cores</button>
+
+    <script>
+        function alteraCores() {
+            const paragrafos = Array.from(document.getElementsByTagName('p'))
+            paragrafos.forEach((paragrafo, index) => {
+                paragrafo.style.color = (index + 1) % 2 === 0 ? 'blue' : 'red'
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+    <p>Parágrafo</p>
+
+    <button onclick="toggle()">Ocultar</button>
+
+    <script>
+        let visible = true
+
+        function toggle() {
+            const botao = document.querySelector('button')
+            const paragrafos = Array.from(document.getElementsByTagName('p'))
+            visible = !visible
+
+            botao.innerText = visible ? 'Ocultar' : 'Mostrar'
+
+            paragrafos.forEach((paragrafo, index) => {
+                paragrafo.style.display = visible ? 'block' : 'none'
+            })
+        }
+    </script>
+</body>
+</html>
