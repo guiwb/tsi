@@ -1,10 +1,3 @@
-<!-- Entrar com nome (campo tipo text), idade (campo tipo text), cidade para inscrição (campo tipo
-select – codificado da seguinte maneira 1–Pelotas 2–Rio Grande 3-Porto Alegre) de uma pessoa
-em campos de formulário HTML. Construa um programa em PHP que imprima o nome da
-pessoa e a mensagem “Inscrição para Zona Sul” caso a pessoa escolha sua inscrição para as
-cidades de Pelotas e Rio Grande ou “Inscrição para a Capital” caso a pessoa escolha sua inscrição
-para Porto Alegre. Caso a pessoa possua idade inferior a 18 anos deverá ser mostrada apenas a
-mensagem “Inscrição Inválida”. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
