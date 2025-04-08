@@ -10,18 +10,19 @@ if (!isset($_SESSION['email']))
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pagina Inicial </title>
+	<title>Pagina Inicial</title>
 	<meta charset="utf-8">
 </head>
 <body>
-<h1> Escolha a opção para o Usuario </h1>
-	<button><a href="form_cad_usuario.php">Cadastrar </a></button>
-	<button><a href="form_edit_usuario.php">Editar </a></button>
-	<button><a href="form_del_usuario.php">Excluir </a></button>
-	<button><a href="listagem.php">Listar</a></button>
-	<button><a href="pesquisa.php">Pesquisar</a></button>
-	<button><a href="sair.php">Sair</a></button>
+	<nav>
+		Seja bem-vindo(a), caso deseje deslogar, <button><a href="sair.php">clique aqui</a></button>.
+	</nav>
 
+	<main>
+		Acesse uma categoria
+		<button><a href="produtos.php">Produtos</a></button>
+		<button><a href="usuarios.php">Usuários</a></button>
+	</main>
 </form>
 </body>
 </html>
