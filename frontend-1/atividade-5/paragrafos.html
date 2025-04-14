@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 5 - Estilização de textos</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+</head>
+<body>
+    <p>Parágrafo 1</p>
+    <p>Parágrafo 2</p>
+    <p>parágrafo 3</p>
+    <p>Parágrafo 4</p>
+    <p>Parágrafo 5</p>
+    <p>Parágrafo 6</p>
+    <p>Parágrafo 7</p>
+    <p>Parágrafo 8</p>
+    <p>Parágrafo 9</p>
+    <p>Parágrafo 10</p>
+
+    <style>
+        /* Vermelho, com sublinhado */
+        p:nth-child(1) {
+            color: red;
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            text-decoration: underline;
+        }
+
+        /* Roxo, riscado com espaçamento entre as fontes */
+        p:nth-child(2) {
+            color: purple;
+            font-size: 5em;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-style: normal;
+            font-weight: 100;
+            text-decoration: line-through;
+            letter-spacing: 20px;
+        }
+
+        /* Azul obliquo com capitalize */
+        p:nth-child(3) {
+            color: blue;
+            font-size: 200%;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-style: oblique;
+            font-weight: bolder;
+            text-transform: capitalize;
+        }
+
+        /* Verde  com sublinhado ao contrário e uppercase */
+        p:nth-child(4) {
+            color: green;
+            font-size: 22px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-decoration: overline;
+            text-transform: uppercase;
+        }
+
+        /* Amarelo em lowercase, itálico e bold */
+        p:nth-child(5) {
+            color: yellow;
+            font-size: 24px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bold;
+            text-transform: lowercase;
+        }
+
+        /* Laranja com sombra sólida em rosa */
+        p:nth-child(6) {
+            color: orange;
+            font-size: 25px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            text-shadow: 3px 3px pink;
+        }
+
+        /* Preto com sombra borrada em vermelho */
+        p:nth-child(7) {
+            color: black;
+            font-size: 2rem;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-shadow: 5px 5px 20px red;
+        }
+
+        /* Amarelo ouro com tamanho de fonte em rem */
+        p:nth-child(8) {
+            color: goldenrod;
+            font-size: 5rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        /* Verde amaelado, com bordas */
+        p:nth-child(9) {
+            color: yellowgreen;
+            font-size: 50px;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            -webkit-text-stroke: red 2px;
+        }
+
+        /* Fonte externa */
+        p:nth-child(10) {
+            color: aqua;
+            font-size: 24px;
+            font-family: "Bungee Spice", sans-serif;
+        }
+    </style>
+</body>
+</html>
