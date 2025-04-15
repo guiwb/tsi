@@ -1,4 +1,5 @@
 <?php
+include("valida_sessao.php");
 include "conecta.php";
 
 $filtro = isset($_GET["filtro"]) ? $_GET["filtro"] : "";

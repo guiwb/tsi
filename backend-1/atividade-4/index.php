@@ -1,10 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['email']))
-{
-	header("Location:login.php");
-}
-
+include("valida_sessao.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +10,7 @@ if (!isset($_SESSION['email']))
 </head>
 <body>
 	<nav>
-		Seja bem-vindo(a), caso deseje deslogar, <button><a href="sair.php">clique aqui</a></button>.
+		Seja bem-vindo(a), caso deseje deslogar, <button><a href="desloga.php">clique aqui</a></button>.
 	</nav>
 
 	<main>
