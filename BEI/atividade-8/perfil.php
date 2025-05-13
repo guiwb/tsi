@@ -9,13 +9,19 @@ $email = isset($_POST["email"]) ? $_POST["email"] : "";
 $senha = isset($_POST["senha"]) ? $_POST["senha"] : "";
 
 if (!empty($id)) {
-    $resultado = pg_query($conexao, "update usuario set nome= '$nome', email = '$email', senha = '$senha' where id = $id returning nome, foto;");
-    $res = pg_fetch_row($resultado);
+    $stmt = $pdo->prepare("UPDATE usuario SET nome= :nome, email = :email, senha = :senha WHERE id = :id RETURNING nome, foto");
+    $stmt->execute([
+        ':nome' => $nome,
+        ':email' => $email,
+        ':senha' => $senha,
+        ':id' => $id,
+    ]);
+    $res = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $_SESSION['user']['nome'] = $res[0];
-    $_SESSION['user']['foto'] = $res[1];
+    $_SESSION['user']['nome'] = $res['nome'];
+    $_SESSION['user']['foto'] = $res['foto'];
 
-    salvaFoto($id, $conexao, "usuario");
+    salvaFoto($id, $pdo, "usuario");
 }
 
 include("navbar.php");

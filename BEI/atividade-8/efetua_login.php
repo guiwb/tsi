@@ -7,10 +7,17 @@ $senha = $_POST["senha"];
 if (!(empty($email) or empty($senha))) {
     include "conecta.php";
 
-    $resultado = pg_query($conexao, "SELECT id, nome, email, foto from usuario WHERE email='$email' and senha='$senha'");
+    $stmt = $pdo->prepare("SELECT id, nome, email, foto from usuario WHERE email= :email and senha= :senha");
+    $stmt->execute([
+        ':email' => $email,
+        ':senha' => $senha
+    ]);
+    
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (pg_num_rows($resultado) == 1) {
-        $_SESSION["user"] = pg_fetch_assoc($resultado, 0);
+    if ($usuario) {
+        $_SESSION["user"] = $usuario;
+        $_SESSION["carrinho"] = [];
         header("Location:index.php");
     } else {
         $_SESSION["error_message"] = "Usuário e/ou senha inválidos!";
@@ -19,5 +26,3 @@ if (!(empty($email) or empty($senha))) {
 } else {
     $_SESSION["error_message"] = "Preencha os campos de usuário e senha!";
 }
-
-?>

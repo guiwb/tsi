@@ -10,4 +10,5 @@ include_once("fotos.php");
     <button><a href="index.php">Home</a></button>
     <button><a href="usuarios.php">Usuários</a></button>
     <button><a href="produtos.php">Produtos</a></button>
+    <button><a href="carrinho.php">Carrinho</a></button>
 </nav>

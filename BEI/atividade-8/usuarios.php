@@ -17,23 +17,35 @@ $cpf = isset($_POST["cpf"]) ? $_POST["cpf"] : "";
 if (!validaCPF($cpf)) $_SESSION["error"] = "CPF inválido!";
 
 if (!empty($nome) && empty($id) && validaCPF($cpf)) {
+    $stmt = $pdo->prepare("INSERT INTO usuario (nome, email, senha, cpf) VALUES (:nome, :email, :senha, :cpf)");
+    $stmt->execute([
+        ':nome' => $nome,
+        ':senha' => $senha,
+        ':email' => $email,
+        ':cpf' => $cpf
+    ]);
 
-    $resultado = pg_query($conexao, "insert into usuario (nome, email, senha, cpf) values ('$nome', '$email', '$senha', '$cpf') RETURNING id;");
-
-    salvaFoto(pg_fetch_row($resultado)[0], $conexao, "usuario");
+    salvaFoto($pdo->lastInsertId(), $pdo, "usuario");
 } else if (!empty($nome) && !empty($id) && validaCPF($cpf)) {
     if (!validaCPF($cpf)) return $_SESSION["error"] = "CPF inválido!";
 
-    pg_query($conexao, "update usuario set nome= '$nome', email = '$email', senha = '$senha', cpf = '$cpf' where id = $id;");
+    $stmt = $pdo->prepare("UPDATE usuario SET nome= :nome, email = :email, senha = :senha, cpf = :cpf where id = :id");
+    $stmt->execute([
+        ':nome' => $nome,
+        ':senha' => $senha,
+        ':email' => $email,
+        ':cpf' => $cpf,
+        ':id' => $id
+    ]);
 
-    salvaFoto($id, $conexao, "usuario");
+    salvaFoto($id, $pdo, "usuario");
 } else if (!empty($id_delecao)) {
-    pg_query($conexao, "delete from usuario where id = $id_delecao;");
+    $stmt = $pdo->prepare("DELETE FROM telefone WHERE id_usuario = :id");
+    $stmt->execute([':id' => $id_delecao]);
+    
+    $stmt = $pdo->prepare("DELETE FROM usuario WHERE id = :id");
+    $stmt->execute([':id' => $id_delecao]);
 }
-
-$filtro_upper = strtoupper($filtro);
-$usuarios = pg_query($conexao, "select id, nome, email, foto, cpf from usuario where upper(nome) like '%$filtro_upper%' or cpf = '$filtro' order by id");
-$total_linhas = pg_num_rows($usuarios);
 include("navbar.php");
 ?>
 
@@ -48,8 +60,9 @@ include("navbar.php");
 
     <?php
     if (!empty($id_edicao)) {
-        $resultado = pg_query($conexao, "select nome, email, senha, foto, cpf from usuario where id = $id_edicao");
-        $usuario_edicao = pg_fetch_row($resultado, 0);
+        $stmt = $pdo->prepare("SELECT nome, email, senha, foto, cpf FROM usuario WHERE id = :id");
+        $stmt->execute([':id' => $id_edicao]);
+        $usuario_edicao = $stmt->fetch(PDO::FETCH_ASSOC);
         ?>
         <form action="usuarios.php?id_edicao=<?=$id_edicao?>" method="POST" enctype="multipart/form-data">
             <fieldset>
@@ -57,31 +70,31 @@ include("navbar.php");
 
                 <input type="hidden" name="id" value="<?=$id_edicao?>" required>
 
-                <?=pegaFoto($usuario_edicao[3])?><br>
+                <?=pegaFoto($usuario_edicao['foto'])?><br>
                 <label for="foto">Edite a foto de perfil:
                     <input type="file" id="foto" name="foto"><br><br>
                 </label>
 
                 <label for="nome">Nome:<br>
-                    <input type="text" id="nome" name="nome" value="<?=$usuario_edicao[0]?>" required>
+                    <input type="text" id="nome" name="nome" value="<?=$usuario_edicao['nome']?>" required>
                 </label>
 
                 <br><br>
 
                 <label for="email">Email:<br>
-                    <input type="email" id="email" name="email" value="<?=$usuario_edicao[1]?>" required>
+                    <input type="email" id="email" name="email" value="<?=$usuario_edicao['email']?>" required>
                 </label>
 
                 <br><br>
 
                 <label for="cpf">CPF:<br>
-                    <input type="text" id="cpf" name="cpf" value="<?=$usuario_edicao[4]?>" required>
+                    <input type="text" id="cpf" name="cpf" value="<?=$usuario_edicao['cpf']?>" required>
                 </label>
 
                 <br><br>
 
                 <label for="senha">Senha:<br>
-                    <input type="password" id="senha" name="senha" value="<?=$usuario_edicao[2]?>" required>
+                    <input type="password" id="senha" name="senha" value="<?=$usuario_edicao['senha']?>" required>
                 </label>
 
                 <br><br>
@@ -137,7 +150,13 @@ include("navbar.php");
         <a href="usuarios.php">Limpar</a>
     </form>
     <?php
-    if($total_linhas == 0) {
+    $filtro_nome = "%".strtoupper($filtro)."%";
+    $stmt = $pdo->prepare("SELECT id, nome, email, foto, cpf FROM usuario WHERE upper(nome) LIKE :filtro_nome OR cpf = :filtro ORDER BY id");
+    $stmt->execute([
+        ':filtro_nome' => $filtro_nome,
+        ':filtro' => $filtro
+    ]);
+    if($stmt->rowCount() == 0) {
         echo "Nenhum usuário encontrado!";
     } else {
         ?>
@@ -153,18 +172,17 @@ include("navbar.php");
 
             <tbody>
                 <?php
-                for ($i = 0; $i < $total_linhas; $i++) {
-                    $usuario = pg_fetch_row($usuarios, $i);
+                while ($usuario = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
-                        <td><?=pegaFoto($usuario[3], 30)?></td>
-                        <td><?=$usuario[0]?></td>
-                        <td><?=$usuario[1]?></td>
-                        <td><?=$usuario[2]?></td>
-                        <td><?=$usuario[4]?></td>
+                        <td><?=pegaFoto($usuario['foto'], 30)?></td>
+                        <td><?=$usuario['id']?></td>
+                        <td><?=$usuario['nome']?></td>
+                        <td><?=$usuario['email']?></td>
+                        <td><?=$usuario['cpf']?></td>
                         <td>
-                            <a href="usuarios.php?id_edicao=<?=$usuario[0]?>">Editar</a>
-                            <a href="usuarios.php?id_delecao=<?=$usuario[0]?>">Deletar</a>
+                            <a href="usuarios.php?id_edicao=<?=$usuario['id']?>">Editar</a>
+                            <a href="usuarios.php?id_delecao=<?=$usuario['id']?>">Deletar</a>
                         </td>
                     </tr>
                     <?php

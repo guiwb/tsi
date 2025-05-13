@@ -12,20 +12,26 @@ $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
 $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : "";
 
 if (!empty($nome) && empty($id)) {
-    $resultado = pg_query($conexao, "insert into produto (nome, descricao) values ('$nome', '$descricao') RETURNING id;");
+    $stmt = $pdo->prepare("INSERT INTO produto (nome, descricao) VALUES (:nome, :descricao)");
+    $stmt->execute([
+        ':nome' => $nome,
+        ':descricao' => $descricao,
+    ]);
 
-    salvaFoto(pg_fetch_row($resultado)[0], $conexao, "produto");
+    salvaFoto($pdo->lastInsertId(), $pdo, tabela: "produto");
 } else if (!empty($nome) && !empty($id)) {
-    pg_query($conexao, "update produto set nome= '$nome', descricao = '$descricao' where id = $id;");
+    $stmt = $pdo->prepare("UPDATE produto SET nome= :nome, descricao = :descricao WHERE id = :id");
+    $stmt->execute([
+        ':nome' => $nome,
+        ':descricao' => $descricao,
+        ':id' => $id,
+    ]);
 
-    salvaFoto($id, $conexao, "produto");
+    salvaFoto($id, $pdo, "produto");
 } else if (!empty($id_delecao)) {
-    pg_query($conexao, "delete from produto where id = $id_delecao;");
+    $stmt = $pdo->prepare("DELETE FROM produto WHERE id = :id");
+    $stmt->execute([':id' => $id_delecao]);
 }
-
-$filtro_upper = strtoupper($filtro);
-$produtos = pg_query($conexao, "select id, nome, descricao, foto from produto where upper(nome) like '%$filtro_upper%' order by id");
-$total_linhas = pg_num_rows($produtos);
 include("navbar.php");
 ?>
 
@@ -35,8 +41,9 @@ include("navbar.php");
 
     <?php
     if (!empty($id_edicao)) {
-        $resultado = pg_query($conexao, "select nome, descricao, foto from produto where id = $id_edicao");
-        $produto_edicao = pg_fetch_row($resultado, 0);
+        $stmt = $pdo->prepare("SELECT nome, descricao, foto FROM produto WHERE id = :id");
+        $stmt->execute([':id' => $id_edicao]);
+        $produto_edicao = $stmt->fetch(PDO::FETCH_ASSOC);
         ?>
         <form action="produtos.php" method="POST" enctype="multipart/form-data">
             <fieldset>
@@ -44,19 +51,19 @@ include("navbar.php");
 
                 <input type="hidden" name="id" value="<?=$id_edicao?>" required>
             
-                <?=pegaFoto($produto_edicao[2])?><br>
+                <?=pegaFoto($produto_edicao['foto'])?><br>
                 <label for="foto">Edite a foto do produto:
                     <input type="file" id="foto" name="foto"><br><br>
                 </label>
 
                 <label for="nome">Nome:<br>
-                    <input type="text" id="nome" name="nome" value="<?=$produto_edicao[0]?>" required>
+                    <input type="text" id="nome" name="nome" value="<?=$produto_edicao['nome']?>" required>
                 </label>
 
                 <br><br>
 
                 <label for="descricao">Descrição:<br>
-                    <textarea name="descricao" id="descricao"><?=$produto_edicao[1]?></textarea>
+                    <textarea name="descricao" id="descricao"><?=$produto_edicao['descricao']?></textarea>
                 </label>
 
                 <br><br>
@@ -100,7 +107,11 @@ include("navbar.php");
         <a href="produtos.php">Limpar</a>
     </form>
     <?php
-    if($total_linhas == 0) {
+    $filtro_upper = strtoupper($filtro);
+    $stmt = $pdo->prepare("SELECT id, nome, descricao, foto FROM produto WHERE upper(nome) LIKE :filtro ORDER BY id");
+    $stmt->execute([':filtro' => "%$filtro_upper%"]);
+
+    if($stmt->rowCount() == 0) {
         echo "Nenhum produto encontrado!";
     } else {
         ?>
@@ -115,17 +126,20 @@ include("navbar.php");
 
             <tbody>
                 <?php
-                for ($i = 0; $i < $total_linhas; $i++) {
-                    $produto = pg_fetch_row($produtos, $i);
+                while ($produto = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     ?>
                     <tr>
-                        <td><?=pegaFoto($produto[3], 30)?></td>
-                        <td><?=$produto[0]?></td>
-                        <td><?=$produto[1]?></td>
-                        <td><?=$produto[2]?></td>
+                        <td><?=pegaFoto($produto['foto'], 30)?></td>
+                        <td><?=$produto['id']?></td>
+                        <td><?=$produto['nome']?></td>
+                        <td><?=$produto['descricao']?></td>
                         <td>
-                            <a href="produtos.php?id_edicao=<?=$produto[0]?>">Editar</a>
-                            <a href="produtos.php?id_delecao=<?=$produto[0]?>">Deletar</a>
+                            <a href="produtos.php?id_edicao=<?=$produto['id']?>">Editar</a>
+                            <a href="produtos.php?id_delecao=<?=$produto['id']?>">Deletar</a>
+                            <?php
+                            if(!in_array($produto['id'], $_SESSION['carrinho']))
+                                echo "<a href=\"adiciona_carrinho.php?id=".$produto['id']."\">Adicionar ao carrinho</a>";
+                            ?>
                         </td>
                     </tr>
                     <?php
