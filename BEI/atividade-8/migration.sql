@@ -15,7 +15,8 @@ foreign key (id_usuario) references usuario (id)
 create table produto(
 id serial primary key,
 nome varchar(50) not null,
-descricao varchar(100) not null
+descricao varchar(100) not null,
+valor int
 );
 
 insert into usuario (nome, email, senha)

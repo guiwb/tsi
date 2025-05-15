@@ -2,8 +2,8 @@
 session_start();
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-if(!$id) return null;
-if(in_array($id, $_SESSION['carrinho'])) return null;
+if($id) {
+    $_SESSION['carrinho'][$id] = isset($_SESSION['carrinho'][$id]) ? $_SESSION['carrinho'][$id] + 1 : 1;
+}
 
-$_SESSION['carrinho'][] = $id;
-header("Location:produtos.php");
+header('Location: ' . $_SERVER['HTTP_REFERER']);

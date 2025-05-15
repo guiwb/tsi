@@ -10,20 +10,23 @@ $id_edicao = isset($_GET["id_edicao"]) ? $_GET["id_edicao"] : "";
 $id = isset($_POST["id"]) ? $_POST["id"] : "";
 $nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
 $descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : "";
+$valor = isset($_POST["valor"]) ? $_POST["valor"] : "";
 
 if (!empty($nome) && empty($id)) {
-    $stmt = $pdo->prepare("INSERT INTO produto (nome, descricao) VALUES (:nome, :descricao)");
+    $stmt = $pdo->prepare("INSERT INTO produto (nome, descricao, valor) VALUES (:nome, :descricao, :valor)");
     $stmt->execute([
         ':nome' => $nome,
         ':descricao' => $descricao,
+        ':valor' => $valor,
     ]);
 
     salvaFoto($pdo->lastInsertId(), $pdo, tabela: "produto");
 } else if (!empty($nome) && !empty($id)) {
-    $stmt = $pdo->prepare("UPDATE produto SET nome= :nome, descricao = :descricao WHERE id = :id");
+    $stmt = $pdo->prepare("UPDATE produto SET nome= :nome, descricao = :descricao, valor = :valor WHERE id = :id");
     $stmt->execute([
         ':nome' => $nome,
         ':descricao' => $descricao,
+        ':valor' => $valor,
         ':id' => $id,
     ]);
 
@@ -41,7 +44,7 @@ include("navbar.php");
 
     <?php
     if (!empty($id_edicao)) {
-        $stmt = $pdo->prepare("SELECT nome, descricao, foto FROM produto WHERE id = :id");
+        $stmt = $pdo->prepare("SELECT nome, descricao, foto, valor FROM produto WHERE id = :id");
         $stmt->execute([':id' => $id_edicao]);
         $produto_edicao = $stmt->fetch(PDO::FETCH_ASSOC);
         ?>
@@ -64,6 +67,12 @@ include("navbar.php");
 
                 <label for="descricao">Descrição:<br>
                     <textarea name="descricao" id="descricao"><?=$produto_edicao['descricao']?></textarea>
+                </label>
+
+                <br><br>
+
+                <label for="valor">Valor:<br>
+                    <input type="number" id="valor" name="valor" value="<?=$produto_edicao['valor']?>" required>
                 </label>
 
                 <br><br>
@@ -94,6 +103,12 @@ include("navbar.php");
 
                 <br><br>
 
+                <label for="valor">Valor:<br>
+                    <input type="number" id="valor" name="valor" required>
+                </label>
+
+                <br><br>
+
                 <button type="submit"><strong>Cadastrar</strong></button>
             </fieldset>
         </form>
@@ -108,7 +123,7 @@ include("navbar.php");
     </form>
     <?php
     $filtro_upper = strtoupper($filtro);
-    $stmt = $pdo->prepare("SELECT id, nome, descricao, foto FROM produto WHERE upper(nome) LIKE :filtro ORDER BY id");
+    $stmt = $pdo->prepare("SELECT id, nome, descricao, foto, valor FROM produto WHERE upper(nome) LIKE :filtro ORDER BY id");
     $stmt->execute([':filtro' => "%$filtro_upper%"]);
 
     if($stmt->rowCount() == 0) {
@@ -121,7 +136,9 @@ include("navbar.php");
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Descrição</th>
+                <th>Valor</th>
                 <th>Ações</th>
+                <th>Carrinho</th>
             </thead>
 
             <tbody>
@@ -133,13 +150,15 @@ include("navbar.php");
                         <td><?=$produto['id']?></td>
                         <td><?=$produto['nome']?></td>
                         <td><?=$produto['descricao']?></td>
+                        <td><?=$produto['valor']?></td>
                         <td>
                             <a href="produtos.php?id_edicao=<?=$produto['id']?>">Editar</a>
                             <a href="produtos.php?id_delecao=<?=$produto['id']?>">Deletar</a>
-                            <?php
-                            if(!in_array($produto['id'], $_SESSION['carrinho']))
-                                echo "<a href=\"adiciona_carrinho.php?id=".$produto['id']."\">Adicionar ao carrinho</a>";
-                            ?>
+                        </td>
+                        <td>
+                            Total no carrinho: <?=isset($_SESSION['carrinho'][$produto['id']]) ? $_SESSION['carrinho'][$produto['id']] : 0?>
+                            <a href="remove_carrinho.php?id=<?=$produto['id']?>">-</a>
+                            <a href="adiciona_carrinho.php?id=<?=$produto['id']?>">+</a>
                         </td>
                     </tr>
                     <?php

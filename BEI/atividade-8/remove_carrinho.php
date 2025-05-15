@@ -2,8 +2,10 @@
 session_start();
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 
-if(!$id) return null;
-if(!in_array($id, $_SESSION['carrinho'])) return null;
+if($id && isset($_SESSION['carrinho'][$id]) && $_SESSION['carrinho'][$id] == 1) {
+    unset($_SESSION['carrinho'][$id]);
+} else if (isset($_SESSION['carrinho'][$id]) && $_SESSION['carrinho'][$id] > 1) {
+    $_SESSION['carrinho'][$id] = $_SESSION['carrinho'][$id] - 1;
+}
 
-$_SESSION['carrinho'] = array_values(array_diff($_SESSION['carrinho'], [$id]));
-header("Location:carrinho.php");
+header('Location: ' . $_SERVER['HTTP_REFERER']);
