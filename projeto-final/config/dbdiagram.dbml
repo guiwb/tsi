@@ -1,0 +1,80 @@
+Table environments {
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  name varchar [not null]
+  logo_url varchar
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
+Table users {
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  environment_id uuid [not null]
+  name varchar [not null]
+  email varchar [not null]
+  password varchar [not null]
+  role "USER_ROLE" [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
+Table teams {
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  environment_id uuid [not null]
+  coach_id uuid [not null]
+  name varchar [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
+Table team_users {
+  team_id uuid [not null, primary key]
+  user_id uuid [not null, primary key]
+  created_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
+Table workouts {
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  environment_id uuid [not null]
+  coach_id uuid [not null]
+  name varchar [not null]
+  description varchar
+  scheduled_at timestamp [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
+Table workout_users {
+  user_id uuid [not null, primary key]
+  workout_id uuid [not null, primary key]
+  created_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
+enum USER_ROLE {
+  athlete
+  coach
+  admin
+}
+
+Ref: "teams"."coach_id" > "users"."id"
+
+Ref: "environments"."id" < "users"."environment_id"
+
+Ref: "environments"."id" < "teams"."environment_id"
+
+Ref: "environments"."id" < "workouts"."environment_id"
+
+Ref: "users"."id" < "workouts"."coach_id"
+
+Ref: "teams"."id" < "team_users"."team_id"
+
+Ref: "users"."id" < "team_users"."user_id"
+
+Ref: "workouts"."id" < "workout_users"."workout_id"
+
+Ref: "users"."id" < "workout_users"."user_id"
