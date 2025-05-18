@@ -1,33 +1,61 @@
 <?php
+session_start();
+
+require_once 'controller/index.php';
+
 $routes = [
-  '/' => [
-    "view" => "home.view.php",
-    "title" => "Home",
+  'GET' => [
+    '/' => [
+      "view" => "home.view.php",
+      "title" => "Home",
+      "public" => false,
+    ],
+    '/login' => [
+      "view" => "login.view.php",
+      "title" => "Login",
+      "public" => true,
+    ],
   ],
-  '/login' => [
-    "view" => "login.view.php",
-    "title" => "Login",
+  'POST' => [
+    '/login' => [
+      "perform" => function () {
+        return SessionController::login();
+      },
+      "title" => "Login",
+      "public" => true,
+    ],
+    '/logout' => [
+      "perform" => function () {
+        return SessionController::logout();
+      },
+      "title" => "Logout",
+      "public" => false,
+    ],
   ],
   null => [
     "view" => "not-found.view.php",
     "title" => "Página não encontrada",
+    "public" => false,
   ],
 ];
 
+$method = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
-$current_route = $routes[$uri] ?? $routes[null];
-?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Natare App - <?= $current_route['title'] ?></title>
-</head>
+$GLOBALS['current_route'] = $routes[$method][$uri] ?? $routes[null];
 
-<body>
-  <?php include 'view/' . $current_route['view']; ?>
-</body>
+if (!$current_route['public'] && !isset($_SESSION['user'])) {
+  header('Location: /login');
+  exit;
+} else if ($uri == '/login' && isset($_SESSION['user'])) {
+  header('Location: /');
+  exit;
+}
 
-</html>
+if ($method == 'GET') {
+  $current_route['public'] ? include("template/logged-out.template.php") : include("template/logged-in.template.php");
+  exit;
+} else {
+  $current_route['perform']();
+  exit;
+}
