@@ -1,0 +1,24 @@
+services:
+  php:
+    image: php:8.2-apache
+    container_name: natare_php
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html/
+    depends_on:
+      - postgres_db
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+  postgres_db:
+    image: postgres:latest
+    container_name: natare_db
+    restart: always
+    environment:
+      POSTGRES_USER: guiwb
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: natareapp
+    ports:
+      - "5432:5432"
