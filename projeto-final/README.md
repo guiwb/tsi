@@ -1,6 +1,6 @@
 # Natare App
 
-Sistema web desenvolvido como projeto final para a disciplina de Tecnologias para Sistemas de Informação.
+Sistema web desenvolvido como projeto final para as disciplinas de Back-End I e Front-End I do curso de Tecnologias para Sistemas de Informação (TSI) do Instituto Federal do Rio Grande do Sul (IFSUL).
 
 ## 🚀 Tecnologias
 
