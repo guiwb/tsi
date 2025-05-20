@@ -1,0 +1,19 @@
+button {
+    width: auto;
+    padding: 19px 31px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    background: linear-gradient(90deg, #9181F4 0%, #5038ED 100%);
+}
+
+.button-link {
+    background: none;
+    color: #1C1C1C;
+    font-weight: 500;
+    font-size: 12px;
+    text-decoration: underline;
+}

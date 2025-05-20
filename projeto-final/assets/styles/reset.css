@@ -1,0 +1,59 @@
+/* 1. Use uma box-sizing consistente */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* 2. Remova margens padrão */
+  body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+    margin: 0;
+  }
+  
+  /* 3. Remova lista de estilos padrão */
+  ul[role='list'], ol[role='list'] {
+    list-style: none;
+  }
+  
+  /* 4. Ajustes de altura mínima para body */
+  body {
+    min-height: 100vh;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeSpeed;
+  }
+  
+  /* 5. Imagens e mídias responsivas */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /* 6. Remova estilos padrão de formulários */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /* 7. Evite problemas com anchors sem href */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* 8. Garanta que tudo possa ser clicável em telas sensíveis ao toque */
+  button, [role="button"] {
+    cursor: pointer;
+  }
+  
+  /* 9. Reduza animações para quem prefere menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+  
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
