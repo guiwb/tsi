@@ -13,6 +13,7 @@ Table users {
   name varchar [not null]
   email varchar [not null]
   password varchar [not null]
+  profile_picture varchar [default: null]
   role "USER_ROLE" [not null]
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]

@@ -24,6 +24,7 @@ CREATE TABLE "users" (
   "name" varchar NOT NULL,
   "email" varchar NOT NULL,
   "password" varchar NOT NULL,
+  "profile_picture" varchar DEFAULT NULL,
   "role" "USER_ROLE" NOT NULL,
 	"created_at" timestamp DEFAULT now(),
   "updated_at" timestamp DEFAULT now(),

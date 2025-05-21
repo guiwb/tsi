@@ -20,5 +20,7 @@ services:
       POSTGRES_USER: guiwb
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: natareapp
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
