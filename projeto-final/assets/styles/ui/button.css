@@ -1,4 +1,6 @@
 button {
+    display: flex;
+    align-items: center;
     width: auto;
     padding: 19px 31px;
     border: none;
@@ -8,6 +10,23 @@ button {
     font-weight: bold;
     font-size: 12px;
     background: linear-gradient(90deg, #9181F4 0%, #5038ED 100%);
+}
+
+button.danger {
+    background: linear-gradient(90deg, #FA6449, #FC5451, #FD147B);
+}
+
+button.small {
+    padding: 10px 20px;
+    font-size: 12px;
+}
+
+button.rounded {
+    border-radius: 50px;
+}
+
+button.navy {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .button-link {
