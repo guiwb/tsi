@@ -23,7 +23,9 @@ $uri = $_SERVER['REQUEST_URI'];
         <div class="logout">
             <form action="/logout" method="POST">
                 <button class="danger small rounded" type="submit">
-                    <span class="material-symbols-outlined">logout</span> Sair
+                    <div>
+                        <span class="material-symbols-outlined">logout</span>Sair
+                    </div>
                 </button>
             </form>
         </div>
@@ -70,7 +72,7 @@ $uri = $_SERVER['REQUEST_URI'];
 
     .left li.active {
         background: white;
-        padding: 10px 20px;
+        padding: 10px 15px;
         border-radius: 30px;
         color: #5038ED;
         margin: 0;
@@ -106,5 +108,15 @@ $uri = $_SERVER['REQUEST_URI'];
         transform: scale(0.8);
         margin-right: 5px;
         margin-top: -2px;
+    }
+
+    button div {
+        display: flex;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+    }
+
+    button div:hover {
+        transform: translateX(2px);
     }
 </style>
