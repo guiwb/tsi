@@ -15,6 +15,26 @@ $routes = [
       "title" => "Login",
       "public" => true,
     ],
+    '/equipes' => [
+      "view" => "teams.view.php",
+      "title" => "Equipes",
+      "public" => false,
+    ],
+    '/usuarios' => [
+      "view" => "users.view.php",
+      "title" => "Usuários",
+      "public" => false,
+    ],
+    '/ambiente' => [
+      "view" => "environment.view.php",
+      "title" => "Ambiente",
+      "public" => false,
+    ],
+    '/treinos' => [
+      "view" => "workouts.view.php",
+      "title" => "Treinos",
+      "public" => false,
+    ],
   ],
   'POST' => [
     '/login' => [
