@@ -42,7 +42,7 @@ docker-compose up -d
 
 ```
 .
-├── controller/     # Controladores da aplicação
+├── controller/    # Controladores da aplicação
 ├── database/      # Scripts e migrações do banco de dados
 ├── model/         # Modelos da aplicação
 ├── template/      # Templates reutilizáveis

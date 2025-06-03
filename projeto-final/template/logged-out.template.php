@@ -54,7 +54,6 @@
       ?>
     </div>
     <div class="right">
-
     </div>
   </main>
 </body>
