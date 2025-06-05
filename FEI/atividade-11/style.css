@@ -1,0 +1,15 @@
+section {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+section:last-child {
+    border-bottom: none;
+}
+input {
+    width: 600px;
+}
+
+h1 {
+    margin: 10px 0;
+}
