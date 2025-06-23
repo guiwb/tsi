@@ -34,6 +34,15 @@ class UserController
         exit;
     }
 
+    static function list(int $offset, int $limit): array
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
+        $stmt->execute([$limit, $offset]);
+        return $stmt->fetchAll();
+    }
+
     private static function throwError(string $message): never
     {
         $_SESSION['signup_error'] = $message;

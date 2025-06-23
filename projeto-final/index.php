@@ -26,7 +26,7 @@ $routes = [
       "public" => false,
     ],
     '/usuarios' => [
-      "view" => "users.view.php",
+      "view" => "users/index.view.php",
       "title" => "Usuários",
       "public" => false,
     ],
