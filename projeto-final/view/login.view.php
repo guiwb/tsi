@@ -26,7 +26,7 @@ unset($_SESSION['login_error']);
     </div>
 
     <div class="button-group">
-      <a class="button-link" href="/register">Cadastre-se</a>
+      <a class="button-link" href="/signup">Cadastre-se</a>
       <button type="submit">Entrar</button>
     </div>
   </form>

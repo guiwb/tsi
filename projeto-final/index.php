@@ -15,6 +15,11 @@ $routes = [
       "title" => "Login",
       "public" => true,
     ],
+    '/signup' => [
+      "view" => "signup.view.php",
+      "title" => "Cadastre-se",
+      "public" => true,
+    ],
     '/equipes' => [
       "view" => "teams.view.php",
       "title" => "Equipes",
@@ -44,6 +49,13 @@ $routes = [
       "title" => "Login",
       "public" => true,
     ],
+    '/signup' => [
+      "perform" => function () {
+        return UserController::signup();
+      },
+      "title" => "Login",
+      "public" => true,
+    ],
     '/logout' => [
       "perform" => function () {
         return SessionController::logout();
@@ -52,7 +64,7 @@ $routes = [
       "public" => false,
     ],
   ],
-  null => [
+  'NOT_FOUND' => [
     "view" => "not-found.view.php",
     "title" => "Página não encontrada",
     "public" => false,
@@ -62,7 +74,7 @@ $routes = [
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 
-$GLOBALS['current_route'] = $routes[$method][$uri] ?? $routes[null];
+$GLOBALS['current_route'] = $routes[$method][$uri] ?? $routes['NOT_FOUND'];
 
 if (!$current_route['public'] && !isset($_SESSION['user'])) {
   header('Location: /login');
