@@ -41,34 +41,9 @@
 </table>
 
 <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    th,
-    td {
-        padding: 12px;
-        text-align: left;
-    }
-
-    th {
-        border-radius: 12px 12px 0 0;
-        background-color: #f4f4f4;
-    }
-
-    tr {
-        transition: background-color 0.3s ease;
-        border-bottom: 1px solid #ddd;
-    }
-
-    tr:last-child {
-        border-bottom: none;
-    }
-
-    tr:hover {
-        background-color: #f1f1f1;
+    td:first-child {
+        display: flex;
+        align-items: center;
     }
 
     img {
