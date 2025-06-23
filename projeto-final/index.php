@@ -30,6 +30,11 @@ $routes = [
       "title" => "Usuários",
       "public" => false,
     ],
+    '/usuarios/:id' => [
+      "view" => "users/edit.view.php",
+      "title" => "Editar usuário",
+      "public" => false,
+    ],
     '/ambiente' => [
       "view" => "environment.view.php",
       "title" => "Ambiente",
@@ -72,9 +77,13 @@ $routes = [
 ];
 
 $method = $_SERVER['REQUEST_METHOD'];
-$uri = $_SERVER['REQUEST_URI'];
+$uuid_pattern = '/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}/';
+$uri = preg_replace($uuid_pattern, ':id', $_SERVER['REQUEST_URI']);
+$param_id = preg_match($uuid_pattern, $_SERVER['REQUEST_URI'], $matches) ? $matches[0] : null;
 
 $GLOBALS['current_route'] = $routes[$method][$uri] ?? $routes['NOT_FOUND'];
+$GLOBALS['current_route']['params'] = ["id" => $param_id];
+
 
 if (!$current_route['public'] && !isset($_SESSION['user'])) {
   header('Location: /login');

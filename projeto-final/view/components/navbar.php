@@ -8,16 +8,16 @@ $uri = $_SERVER['REQUEST_URI'];
 
         <ul>
             <li <?php if ($uri == '/') echo 'class="active"' ?>><a href="/">Página inicial</a></li>
-            <li <?php if ($uri == '/equipes') echo 'class="active"' ?>><a href="/equipes">Equipes</a></li>
-            <li <?php if ($uri == '/treinos') echo 'class="active"' ?>><a href="/treinos">Treinos</a></li>
-            <li <?php if ($uri == '/usuarios') echo 'class="active"' ?>><a href="/usuarios">Usuários</a></li>
-            <li <?php if ($uri == '/ambiente') echo 'class="active"' ?>><a href="/ambiente">Ambiente</a></li>
+            <li <?php if (str_starts_with($uri, '/equipes')) echo 'class="active"' ?>><a href="/equipes">Equipes</a></li>
+            <li <?php if (str_starts_with($uri, '/treinos')) echo 'class="active"' ?>><a href="/treinos">Treinos</a></li>
+            <li <?php if (str_starts_with($uri, '/usuarios')) echo 'class="active"' ?>><a href="/usuarios">Usuários</a></li>
+            <li <?php if (str_starts_with($uri, '/ambiente')) echo 'class="active"' ?>><a href="/ambiente">Ambiente</a></li>
         </ul>
     </div>
 
     <div class="right">
         <div class="profile">
-            <img src="assets/images/<?= $_SESSION['user']['profile_picture'] ?? 'profile_picture.png'; ?>" alt="User Profile Picture">
+            <img src="<?= BASE_URL ?>assets/images/<?= $_SESSION['user']['profile_picture'] ?? 'profile_picture.png'; ?>" alt="User Profile Picture">
         </div>
 
         <div class="logout">

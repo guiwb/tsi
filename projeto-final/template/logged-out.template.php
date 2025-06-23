@@ -1,3 +1,7 @@
+<?php
+define('BASE_URL', '/');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +10,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Natare App - <?= $current_route['title'] ?></title>
 
-  <link rel="stylesheet" href="./assets/styles/reset.css">
-  <link rel="stylesheet" href="./assets/styles/ui/input.css">
-  <link rel="stylesheet" href="./assets/styles/ui/button.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/reset.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/logged-out-form.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/button.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">

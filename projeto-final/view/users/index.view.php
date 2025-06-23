@@ -1,4 +1,6 @@
-<h1>Usuários</h1>
+<ul class="breadcrumb">
+    <li>Usuários</li>
+</ul>
 
 <table>
     <thead>
@@ -30,7 +32,7 @@
                 <td><?= $user['role'] ?></td>
                 <td><?= date('d/m/Y \à\s H:i', strtotime($user['created_at'])) ?></td>
                 <td><?= date('d/m/Y \à\s H:i', strtotime($user['updated_at'])) ?></td>
-                <td>botao</td>
+                <td><a href="/usuarios/<?= $user['id'] ?>">Editar</a></td>
             </tr>
         <?php
         }
@@ -39,12 +41,6 @@
 </table>
 
 <style>
-    h1 {
-        margin: 20px 0;
-        font-size: 24px;
-        color: #333;
-    }
-
     table {
         width: 100%;
         border-collapse: collapse;
