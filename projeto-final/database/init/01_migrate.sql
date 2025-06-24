@@ -46,7 +46,7 @@ CREATE TABLE "team_users" (
   "user_id" uuid NOT NULL,
   "created_at" timestamp DEFAULT now(),
   "deleted_at" timestamp DEFAULT NULL,
-  PRIMARY KEY ("team_id", "user_id")
+  PRIMARY KEY ("team_id", "user_id", "deleted_at")
 );
 
 CREATE TABLE "workouts" (
@@ -61,12 +61,12 @@ CREATE TABLE "workouts" (
   "deleted_at" timestamp DEFAULT NULL
 );
 
-CREATE TABLE "workout_users" (
-  "user_id" uuid NOT NULL,
+CREATE TABLE "workout_teams" (
+  "team_id" uuid NOT NULL,
   "workout_id" uuid NOT NULL,
   "created_at" timestamp DEFAULT now(),
   "deleted_at" timestamp DEFAULT NULL,
-  PRIMARY KEY ("user_id", "workout_id")
+  PRIMARY KEY ("user_id", "workout_id", "deleted_at")
 );
 
 ALTER TABLE "teams" ADD FOREIGN KEY ("coach_id") REFERENCES "users" ("id");

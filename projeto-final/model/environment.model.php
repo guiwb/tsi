@@ -11,4 +11,12 @@ class EnvironmentModel
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    static function update(string $id, string $name, string $description): void
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("UPDATE environments SET name = ? WHERE id = ?");
+        $stmt->execute([$name, $description, $id]);
+    }
 }
