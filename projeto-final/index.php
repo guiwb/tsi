@@ -68,6 +68,13 @@ $routes = [
       "title" => "Logout",
       "public" => false,
     ],
+    '/usuarios/:id' => [
+      "perform" => function ($id) {
+        return UserController::update($id);
+      },
+      "title" => "Logout",
+      "public" => false,
+    ],
   ],
   'NOT_FOUND' => [
     "view" => "not-found.view.php",
@@ -97,6 +104,6 @@ if ($method == 'GET') {
   $current_route['public'] ? include("template/logged-out.template.php") : include("template/logged-in.template.php");
   exit;
 } else {
-  $current_route['perform']();
+  $param_id ? $current_route['perform']($param_id) : $current_route['perform']();
   exit;
 }

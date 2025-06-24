@@ -11,7 +11,7 @@ class SessionController
     $user = UserModel::findByEmail($email);
 
     if (!$user || !password_verify($password, $user['password'])) {
-      $_SESSION['login_error'] = 'E-mail ou senha inválidos!';
+      $_SESSION['toast_error'] = 'E-mail ou senha inválidos!';
       header('Location: /login');
       exit;
     }

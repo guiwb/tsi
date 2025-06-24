@@ -63,6 +63,7 @@ define('BASE_URL', '/');
 <body>
   <section class="container">
     <?php
+    include 'view/components/toast.php';
     include 'view/components/navbar.php';
     include 'view/' . $current_route['view'];
     ?>

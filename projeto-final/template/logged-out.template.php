@@ -54,6 +54,7 @@ define('BASE_URL', '/');
   <main>
     <div class="left">
       <?php
+      include 'view/components/toast.php';
       include 'view/' . $current_route['view'];
       ?>
     </div>

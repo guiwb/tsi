@@ -43,10 +43,48 @@ class UserController
         return $stmt->fetchAll();
     }
 
+    static function update(string $id): never
+    {
+        global $pdo;
+
+        $user = UserModel::findById($id);
+
+        if (!$user) {
+            self::throwError('Usuário não encontrado!');
+        }
+
+        $name = $_POST['name'] ?? null;
+        $role = $_POST['role'] ?? null;
+        $password = $_POST['password'] ?? null;
+        $confirm_password = $_POST['confirm_password'] ?? null;
+
+        if (!$name || !$role) {
+            self::throwError('Nome e cargo são obrigatórios!');
+        }
+
+        if ($password && $password !== $confirm_password) {
+            self::throwError('As senhas não conferem!');
+        }
+
+        $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ?, updated_at = NOW() WHERE id = ?");
+        $stmt->execute([$name, $role, $id]);
+
+        if ($password) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $stmt->execute([$hashedPassword, $id]);
+        }
+
+        $_SESSION['toast_success'] = "Usuáio atualizado com sucesso!";
+
+        header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/');
+        exit;
+    }
+
     private static function throwError(string $message): never
     {
-        $_SESSION['signup_error'] = $message;
-        header('Location: /signup');
+        $_SESSION['toast_error'] = $message;
+        header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/');
         exit;
     }
 }

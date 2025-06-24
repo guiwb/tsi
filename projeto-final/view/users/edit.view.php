@@ -12,7 +12,7 @@ if (!$user) {
     <li>Editar usuário</li>
 </ul>
 
-<form class="form-group" action="usuarios/edit/<?= $user['id'] ?>">
+<form class="form-group" method="POST">
     <div class="input-group">
         <label for="name">Nome completo</label>
         <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required>
