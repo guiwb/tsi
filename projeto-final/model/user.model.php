@@ -15,6 +15,15 @@ enum UserRole
       self::ATHLETE => 'athlete',
     };
   }
+
+  public static function fromString(string $role): self
+  {
+    return match ($role) {
+      'admin' => self::ADMIN,
+      'coach' => self::COACH,
+      'athlete' => self::ATHLETE
+    };
+  }
 }
 
 class UserModel
@@ -37,6 +46,15 @@ class UserModel
     return $stmt->fetch();
   }
 
+  static function list(int $offset, int $limit): array
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
+    $stmt->execute([$limit, $offset]);
+    return $stmt->fetchAll();
+  }
+
   static function create(string $name, string $email, string $password, string $environment_id, UserRole $role): string
   {
     global $pdo;
@@ -45,5 +63,26 @@ class UserModel
     $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $environment_id, $role->toString()]);
 
     return $stmt->fetchColumn();
+  }
+
+  static function update(string $id, string $name, UserRole $role, ?string $password = null): void
+  {
+    global $pdo;
+
+    if ($password) {
+      $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ?, password = ? WHERE id = ?");
+      $stmt->execute([$name, $role->toString(), password_hash($password, PASSWORD_DEFAULT), $id]);
+    } else {
+      $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ? WHERE id = ?");
+      $stmt->execute([$name, $role->toString(), $id]);
+    }
+  }
+
+  static function delete(string $id): void
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("UPDATE users SET deleted_at = NOW() WHERE id = ?");
+    $stmt->execute([$id]);
   }
 }

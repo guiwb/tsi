@@ -36,17 +36,11 @@ class UserController
 
     static function list(int $offset, int $limit): array
     {
-        global $pdo;
-
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
-        $stmt->execute([$limit, $offset]);
-        return $stmt->fetchAll();
+        return UserModel::list($offset, $limit);
     }
 
     static function update(string $id): never
     {
-        global $pdo;
-
         $user = UserModel::findById($id);
 
         if (!$user) {
@@ -66,16 +60,14 @@ class UserController
             self::throwError('As senhas não conferem!');
         }
 
-        $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ?, updated_at = NOW() WHERE id = ?");
-        $stmt->execute([$name, $role, $id]);
+        UserModel::update(
+            id: $id,
+            name: $name,
+            role: UserRole::fromString($role),
+            password: $password ?: null
+        );
 
-        if ($password) {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
-            $stmt->execute([$hashedPassword, $id]);
-        }
-
-        $_SESSION['toast_success'] = "Usuáio atualizado com sucesso!";
+        $_SESSION['toast_success'] = "Usuário atualizado com sucesso!";
 
         header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/');
         exit;
