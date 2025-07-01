@@ -1,0 +1,63 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.assentos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.assento {
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s ease;
+}
+
+.assento:hover {
+    background-color: gray;
+}
+
+.assento.reservado {
+    background-color: red;
+    cursor: not-allowed;
+}
+
+.assento.reservado:hover {
+    background-color: darkred;
+}
+
+.assento.selecionado {
+    background-color: green;
+}
+
+.assento.selecionado:hover {
+    background-color: darkgreen;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}

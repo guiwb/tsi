@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exercício - Arrays</title>
+</head>
+
+<body>
+    <h1>Exercícios de Arrays em JavaScript</h1>
+    <script>
+        function somaArray(arr) {
+            return arr.reduce((acc, num) => acc + num, 0);
+        }
+
+        console.log("Soma array:", somaArray([1, 2, 3, 4, 5]));
+
+        function inverteArray(arr) {
+            return arr.reverse();
+        }
+
+        console.log("Inverte array:", inverteArray([1, 2, 3, 4, 5]));
+
+        function contaOcorrencias(arr, valor) {
+            return arr.filter(item => item === valor).length;
+        }
+
+        console.log("Conta ocorrerências de 2:", contaOcorrencias([1, 2, 2, 3, 4, 2], 2));
+
+        function existeElemento(arr, valor) {
+            return arr.includes(valor);
+        }
+
+        console.log("Existe elemento 3:", existeElemento([1, 2, 3, 4, 5], 3));
+        console.log("Existe elemento 10:", existeElemento([1, 2, 3, 4, 5], 10));
+
+        function filtraMaioresQue(arr, valor) {
+            return arr.filter(item => item > valor);
+        }
+
+        console.log("Filtra maiores que 3:", filtraMaioresQue([1, 2, 3, 4, 5], 3));
+
+        function removeDuplicados(arr) {
+            return [...new Set(arr)];
+        }
+
+        console.log("Remove duplicados:", removeDuplicados([1, 2, 2, 3, 4, 4, 5]));
+
+        function concatenaArrays(arr1, arr2) {
+            return arr1.concat(arr2);
+        }
+
+        console.log("Concatena arrays:", concatenaArrays([1, 2, 3], [4, 5, 6]));
+
+        function maiorElemento(arr) {
+            return Math.max(...arr);
+        }
+
+        console.log("Maior elemento:", maiorElemento([1, 2, 3, 4, 5]));
+
+        function somaImpares(arr) {
+            return arr.filter(num => num % 2 !== 0).reduce((acc, num) => acc + num, 0);
+        }
+
+        console.log("Soma impares:", somaImpares([1, 2, 3, 4, 5]));
+
+        function intercalaArrays(arr1, arr2) {
+            const resultado = [];
+            const tamanhoMaximo = Math.max(arr1.length, arr2.length);
+
+            for (let i = 0; i < tamanhoMaximo; i++) {
+                if (i < arr1.length) resultado.push(arr1[i]);
+                if (i < arr2.length) resultado.push(arr2[i]);
+            }
+            return resultado;
+        }
+
+        console.log("Intercala arrays:", intercalaArrays([1, 2, 3], ['a', 'b', 'c']));
+    </script>
+</body>
+
+</html>
