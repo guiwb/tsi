@@ -40,6 +40,21 @@ $routes = [
       "title" => "Editar usuário",
       "public" => false,
     ],
+    '/equipes' => [
+      "view" => "teams/index.view.php",
+      "title" => "Equipes",
+      "public" => false,
+    ],
+    '/equipes/novo' => [
+      "view" => "teams/create.view.php",
+      "title" => "Criar equipe",
+      "public" => false,
+    ],
+    '/equipes/:id' => [
+      "view" => "teams/edit.view.php",
+      "title" => "Editar equipe",
+      "public" => false,
+    ],
     '/ambiente' => [
       "view" => "environment.view.php",
       "title" => "Ambiente",
@@ -92,6 +107,27 @@ $routes = [
         return UserController::delete($id);
       },
       "title" => "Deletar usuário",
+      "public" => false,
+    ],
+    '/equipes/:id' => [
+      "perform" => function ($id) {
+        return TeamController::update($id);
+      },
+      "title" => "Editar time",
+      "public" => false,
+    ],
+    '/equipes/novo' => [
+      "perform" => function () {
+        return TeamController::create();
+      },
+      "title" => "Criar time",
+      "public" => false,
+    ],
+    '/equipes/:id/delete' => [
+      "perform" => function ($id) {
+        return TeamController::delete($id);
+      },
+      "title" => "Deletar time",
       "public" => false,
     ],
   ],

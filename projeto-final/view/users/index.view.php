@@ -50,12 +50,6 @@
 </table>
 
 <style>
-    header {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-
     td:first-child {
         display: flex;
         align-items: center;

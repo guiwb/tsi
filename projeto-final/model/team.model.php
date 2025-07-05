@@ -16,27 +16,27 @@ class TeamModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("SELECT * FROM teams WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
+        $stmt = $pdo->prepare("SELECT *, (select count(*) from team_users where team_id = teams.id) as total_athletes FROM teams WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
         $stmt->execute([$limit, $offset]);
         return $stmt->fetchAll();
     }
 
-    static function create(string $name, string $coach_id): string
+    static function create(string $name, string $coach_id, string $environment_id): string
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("INSERT INTO teams (name, coach_id) VALUES (?, ?) RETURNING id");
-        $stmt->execute([$name, $coach_id]);
+        $stmt = $pdo->prepare("INSERT INTO teams (name, coach_id, environment_id) VALUES (?, ?, ?) RETURNING id");
+        $stmt->execute([$name, $coach_id, $environment_id]);
 
         return $stmt->fetchColumn();
     }
 
-    static function update(string $id, string $name, string $coach_id): void
+    static function update(string $id, string $name): void
     {
         global $pdo;
 
         $stmt = $pdo->prepare("UPDATE teams SET name = ? WHERE id = ?");
-        $stmt->execute([$name, $coach_id, $id]);
+        $stmt->execute([$name, $id]);
     }
 
     static function delete(string $id): void
