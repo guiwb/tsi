@@ -37,10 +37,16 @@
                 <td><?= date('d/m/Y \à\s H:i', strtotime($user['created_at'])) ?></td>
                 <td><?= date('d/m/Y \à\s H:i', strtotime($user['updated_at'])) ?></td>
                 <td>
-                    <a href="/usuarios/<?= $user['id'] ?>">Editar</a> |
-                    <form action="/usuarios/<?= $user['id'] ?>/delete" method="POST">
-                        <input type="submit" value="Deletar" />
-                    </form>
+                    <div class="action-buttons">
+                        <a href="/usuarios/<?= $user['id'] ?>" class="button action edit" title="Editar usuário">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
+                        <form action="/usuarios/<?= $user['id'] ?>/delete" method="POST" class="delete-form" onsubmit="return confirm('Tem certeza que deseja deletar este usuário?')">
+                            <button type="submit" class="button action delete" title="Deletar usuário">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         <?php

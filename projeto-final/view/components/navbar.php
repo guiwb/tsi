@@ -104,19 +104,19 @@ $uri = $_SERVER['REQUEST_URI'];
         border-radius: 50%;
     }
 
-    button span {
+    .logout button span {
         transform: scale(0.8);
         margin-right: 5px;
         margin-top: -2px;
     }
 
-    button div {
+    .logout button div {
         display: flex;
         align-items: center;
         transition: all 0.2s ease-in-out;
     }
 
-    button div:hover {
+    .logout button div:hover {
         transform: translateX(2px);
     }
 </style>

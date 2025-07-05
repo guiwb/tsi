@@ -28,10 +28,16 @@
                 <td><?= $team['name'] ?></td>
                 <td><?= $team['total_athletes'] ?></td>
                 <td>
-                    <a href="/equipes/<?= $team['id'] ?>">Editar</a> |
-                    <form action="/equipes/<?= $team['id'] ?>/delete" method="POST">
-                        <input type="submit" value="Deletar" />
-                    </form>
+                    <div class="action-buttons">
+                        <a href="/equipes/<?= $team['id'] ?>" class="button action edit" title="Editar equipe">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
+                        <form action="/equipes/<?= $team['id'] ?>/delete" method="POST" class="delete-form" onsubmit="return confirm('Tem certeza que deseja deletar esta equipe?')">
+                            <button type="submit" class="button action delete" title="Deletar equipe">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         <?php

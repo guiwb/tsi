@@ -41,3 +41,49 @@ button.with-icon, .button.with-icon {
     font-size: 12px;
     text-decoration: underline;
 }
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+button.action, .button.action {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 6px;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+button.action:hover, .button.action:hover {
+    transform: translateY(-1px);
+}
+
+button.action.edit, .button.action.edit {
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+}
+
+button.action.edit:hover, .button.action.edit:hover {
+    background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+button.action.delete, .button.action.delete {
+    background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+}
+
+button.action.delete:hover, .button.action.delete:hover {
+    background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+.delete-form {
+    margin: 0;
+    padding: 0;
+}
+
+.action-buttons .material-symbols-outlined {
+    font-size: 18px;
+}
