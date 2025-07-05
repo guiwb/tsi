@@ -75,6 +75,14 @@ $routes = [
       "title" => "Logout",
       "public" => false,
     ],
+
+    '/usuarios/:id/delete' => [
+      "perform" => function ($id) {
+        return UserController::delete($id);
+      },
+      "title" => "Deletar usuário",
+      "public" => false,
+    ],
   ],
   'NOT_FOUND' => [
     "view" => "not-found.view.php",

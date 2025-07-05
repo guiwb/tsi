@@ -73,6 +73,26 @@ class UserController
         exit;
     }
 
+    static function delete(string $id): never
+    {
+        $user = UserModel::findById($id);
+
+        if (!$user) {
+            self::throwError('Usuário não encontrado!');
+        }
+
+        if ($user['id'] === $_SESSION['user']['id']) {
+            self::throwError('Você não pode deletar sua própria conta!');
+        }
+
+        UserModel::delete($id);
+
+        $_SESSION['toast_success'] = "Usuário deletado com sucesso!";
+
+        header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/');
+        exit;
+    }
+
     private static function throwError(string $message): never
     {
         $_SESSION['toast_error'] = $message;

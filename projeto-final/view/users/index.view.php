@@ -32,7 +32,12 @@
                 <td><?= $user['role'] ?></td>
                 <td><?= date('d/m/Y \à\s H:i', strtotime($user['created_at'])) ?></td>
                 <td><?= date('d/m/Y \à\s H:i', strtotime($user['updated_at'])) ?></td>
-                <td><a href="/usuarios/<?= $user['id'] ?>">Editar</a></td>
+                <td>
+                    <a href="/usuarios/<?= $user['id'] ?>">Editar</a> |
+                    <form action="/usuarios/<?= $user['id'] ?>/delete" method="POST">
+                        <input type="submit" value="Deletar" />
+                    </form>
+                </td>
             </tr>
         <?php
         }
