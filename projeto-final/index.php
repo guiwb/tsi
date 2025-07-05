@@ -140,6 +140,20 @@ $routes = [
       "title" => "Deletar time",
       "public" => false,
     ],
+    '/equipes/:param/atleta/:param/adicionar' => [
+      "perform" => function ($params) {
+        return TeamController::addAthlete($params[0], $params[1]);
+      },
+      "title" => "Adicionar atleta à equipe",
+      "public" => false,
+    ],
+    '/equipes/:param/atleta/:param/remover' => [
+      "perform" => function ($params) {
+        return TeamController::removeAthlete($params[0], $params[1]);
+      },
+      "title" => "Remover atleta da equipe",
+      "public" => false,
+    ],
     '/treinos/:param' => [
       "perform" => function ($params) {
         return WorkoutController::update($params[0]);

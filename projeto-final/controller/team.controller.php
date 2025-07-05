@@ -65,6 +65,44 @@ class TeamController
         exit;
     }
 
+    static function addAthlete(string $teamId, string $athleteId): never
+    {
+        $user = UserModel::findById($athleteId);
+
+        if (!$user || $user['role'] !== UserRole::ATHLETE->toString()) {
+            self::throwError('Atleta não encontrado!');
+        }
+
+        $relation = TeamModel::findAthleteRelation($teamId, $athleteId);
+
+        if ($relation) {
+            self::throwError('Atleta já está na equipe!');
+        }
+
+        TeamModel::addAthlete($teamId, $athleteId);
+
+        $_SESSION['toast_success'] = "Atleta adicionado à equipe com sucesso!";
+
+        header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/');
+        exit;
+    }
+
+    static function removeAthlete(string $teamId, string $athleteId): never
+    {
+        $relation = TeamModel::findAthleteRelation($teamId, $athleteId);
+
+        if (!$relation) {
+            self::throwError('Atleta não encontrado na equipe!');
+        }
+
+        TeamModel::removeAthlete($teamId, $athleteId);
+
+        $_SESSION['toast_success'] = "Atleta removido da equipe com sucesso!";
+
+        header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/');
+        exit;
+    }
+
     private static function throwError(string $message): never
     {
         $_SESSION['toast_error'] = $message;

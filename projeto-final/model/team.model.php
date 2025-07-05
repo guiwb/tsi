@@ -21,6 +21,33 @@ class TeamModel
         return $stmt->fetchAll();
     }
 
+    static function listAthletes(string $teamId): array
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = 'athlete' AND deleted_at IS NULL");
+        $stmt->execute([$teamId]);
+        return $stmt->fetchAll();
+    }
+
+    static function listNonAthletes(string $teamId): array
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id NOT IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = 'athlete' AND deleted_at IS NULL");
+        $stmt->execute([$teamId]);
+        return $stmt->fetchAll();
+    }
+
+    static function findAthleteRelation(string $teamId, string $athleteId): mixed
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("SELECT * FROM team_users WHERE team_id = ? AND user_id = ? AND deleted_at IS NULL");
+        $stmt->execute([$teamId, $athleteId]);
+        return $stmt->fetch();
+    }
+
     static function create(string $name, string $coach_id, string $environment_id): string
     {
         global $pdo;
@@ -47,19 +74,19 @@ class TeamModel
         $stmt->execute([$id]);
     }
 
-    static function addUser(string $team_id, string $user_id): void
+    static function addAthlete(string $team_id, string $athlete_id): void
     {
         global $pdo;
 
         $stmt = $pdo->prepare("INSERT INTO team_users (team_id, user_id) VALUES (?, ?)");
-        $stmt->execute([$team_id, $user_id]);
+        $stmt->execute([$team_id, $athlete_id]);
     }
 
-    static function removeUser(string $team_id, string $user_id): void
+    static function removeAthlete(string $team_id, string $athlete_id): void
     {
         global $pdo;
 
         $stmt = $pdo->prepare("UPDATE team_users SET deleted_at = NOW() WHERE team_id = ? AND user_id = ?");
-        $stmt->execute([$team_id, $user_id]);
+        $stmt->execute([$team_id, $athlete_id]);
     }
 }
