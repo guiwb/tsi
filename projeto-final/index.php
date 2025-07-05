@@ -35,7 +35,7 @@ $routes = [
       "title" => "Criar usuário",
       "public" => false,
     ],
-    '/usuarios/:id' => [
+    '/usuarios/:param' => [
       "view" => "users/edit.view.php",
       "title" => "Editar usuário",
       "public" => false,
@@ -50,7 +50,7 @@ $routes = [
       "title" => "Criar equipe",
       "public" => false,
     ],
-    '/equipes/:id' => [
+    '/equipes/:param' => [
       "view" => "teams/edit.view.php",
       "title" => "Editar equipe",
       "public" => false,
@@ -70,7 +70,7 @@ $routes = [
       "title" => "Criar treino",
       "public" => false,
     ],
-    '/treinos/:id' => [
+    '/treinos/:param' => [
       "view" => "workouts/edit.view.php",
       "title" => "Editar treino",
       "public" => false,
@@ -98,9 +98,9 @@ $routes = [
       "title" => "Logout",
       "public" => false,
     ],
-    '/usuarios/:id' => [
-      "perform" => function ($id) {
-        return UserController::update($id);
+    '/usuarios/:param' => [
+      "perform" => function ($params) {
+        return UserController::update($params[0]);
       },
       "title" => "Editar usuário",
       "public" => false,
@@ -112,16 +112,16 @@ $routes = [
       "title" => "Criar usuário",
       "public" => false,
     ],
-    '/usuarios/:id/delete' => [
-      "perform" => function ($id) {
-        return UserController::delete($id);
+    '/usuarios/:param/delete' => [
+      "perform" => function ($params) {
+        return UserController::delete($params[0]);
       },
       "title" => "Deletar usuário",
       "public" => false,
     ],
-    '/equipes/:id' => [
-      "perform" => function ($id) {
-        return TeamController::update($id);
+    '/equipes/:param' => [
+      "perform" => function ($params) {
+        return TeamController::update($params[0]);
       },
       "title" => "Editar time",
       "public" => false,
@@ -133,16 +133,16 @@ $routes = [
       "title" => "Criar time",
       "public" => false,
     ],
-    '/equipes/:id/delete' => [
-      "perform" => function ($id) {
-        return TeamController::delete($id);
+    '/equipes/:param/delete' => [
+      "perform" => function ($params) {
+        return TeamController::delete($params[0]);
       },
       "title" => "Deletar time",
       "public" => false,
     ],
-    '/treinos/:id' => [
-      "perform" => function ($id) {
-        return WorkoutController::update($id);
+    '/treinos/:param' => [
+      "perform" => function ($params) {
+        return WorkoutController::update($params[0]);
       },
       "title" => "Editar treino",
       "public" => false,
@@ -154,9 +154,9 @@ $routes = [
       "title" => "Criar treino",
       "public" => false,
     ],
-    '/treinos/:id/delete' => [
-      "perform" => function ($id) {
-        return WorkoutController::delete($id);
+    '/treinos/:param/delete' => [
+      "perform" => function ($params) {
+        return WorkoutController::delete($params[0]);
       },
       "title" => "Deletar treino",
       "public" => false,
@@ -171,11 +171,12 @@ $routes = [
 
 $method = $_SERVER['REQUEST_METHOD'];
 $uuid_pattern = '/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}/';
-$uri = preg_replace($uuid_pattern, ':id', $_SERVER['REQUEST_URI']);
-$param_id = preg_match($uuid_pattern, $_SERVER['REQUEST_URI'], $matches) ? $matches[0] : null;
+
+$uri = preg_replace($uuid_pattern, ':param', $_SERVER['REQUEST_URI']);
+$params = preg_match_all($uuid_pattern, $_SERVER['REQUEST_URI'], $matches) ? $matches[0] : null;
 
 $GLOBALS['current_route'] = $routes[$method][$uri] ?? $routes['NOT_FOUND'];
-$GLOBALS['current_route']['params'] = ["id" => $param_id];
+$GLOBALS['current_route']['params'] = $params;
 
 
 if (!$current_route['public'] && !isset($_SESSION['user'])) {
@@ -190,6 +191,6 @@ if ($method == 'GET') {
   $current_route['public'] ? include("template/logged-out.template.php") : include("template/logged-in.template.php");
   exit;
 } else {
-  $param_id ? $current_route['perform']($param_id) : $current_route['perform']();
+  $params ? $current_route['perform']($params) : $current_route['perform']();
   exit;
 }

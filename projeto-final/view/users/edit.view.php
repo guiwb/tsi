@@ -1,5 +1,5 @@
 <?php
-$user = UserModel::findById($current_route['params']['id']);
+$user = UserModel::findById($current_route['params'][0]);
 
 if (!$user) {
     header('Location: /usuarios');

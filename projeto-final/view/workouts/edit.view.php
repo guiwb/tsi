@@ -1,5 +1,5 @@
 <?php
-$workout = WorkoutModel::findById($current_route['params']['id']);
+$workout = WorkoutModel::findById($current_route['params'][0]);
 
 if (!$workout) {
     header('Location: /treinos');

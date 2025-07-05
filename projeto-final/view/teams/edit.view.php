@@ -1,5 +1,5 @@
 <?php
-$team = TeamModel::findById($current_route['params']['id']);
+$team = TeamModel::findById($current_route['params'][0]);
 
 if (!$team) {
     header('Location: /equipes');
