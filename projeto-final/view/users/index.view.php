@@ -34,8 +34,8 @@
                 </td>
                 <td><?= $user['email'] ?></td>
                 <td><?= $user['role'] ?></td>
-                <td><?= date('d/m/Y \à\s H:i', strtotime($user['created_at'])) ?></td>
-                <td><?= date('d/m/Y \à\s H:i', strtotime($user['updated_at'])) ?></td>
+                <td data-epoch="<?= strtotime($user['created_at']) * 1000 ?>"></td>
+                <td data-epoch="<?= strtotime($user['updated_at']) * 1000 ?>"></td>
                 <td>
                     <div class="action-buttons">
                         <a href="/usuarios/<?= $user['id'] ?>" class="button action edit" title="Editar usuário">

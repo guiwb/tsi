@@ -75,6 +75,8 @@ define('BASE_URL', '/');
     include 'view/' . $current_route['view'];
     ?>
   </section>
+
+  <script src="<?= BASE_URL ?>assets/js/date-formatter.js"></script>
 </body>
 
 </html>

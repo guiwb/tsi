@@ -28,7 +28,7 @@
             <tr>
                 <td><?= $workout['name'] ?></td>
                 <td><?= $workout['description'] ?></td>
-                <td><?= date('d/m/Y \à\s H:i', strtotime($workout['scheduled_at'])) ?></td>
+                <td data-epoch="<?= strtotime($workout['scheduled_at']) * 1000 ?>"></td>
                 <td>
                     <div class="action-buttons">
                         <a href="/treinos/<?= $workout['id'] ?>" class="button action edit" title="Editar treino">
