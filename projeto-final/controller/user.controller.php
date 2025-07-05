@@ -69,7 +69,7 @@ class UserController
 
         $_SESSION['toast_success'] = "Usuário atualizado com sucesso!";
 
-        header('Location: ' . $_SERVER['HTTP_REFERER'] ?? '/');
+        header('Location: /usuarios');
         exit;
     }
 
