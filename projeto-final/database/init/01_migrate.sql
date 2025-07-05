@@ -42,11 +42,12 @@ CREATE TABLE "teams" (
 );
 
 CREATE TABLE "team_users" (
+  "id" uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   "team_id" uuid NOT NULL, 
   "user_id" uuid NOT NULL,
   "created_at" timestamp DEFAULT now(),
   "deleted_at" timestamp DEFAULT NULL,
-  PRIMARY KEY ("team_id", "user_id", "deleted_at")
+  CONSTRAINT "unique_active_team_user" UNIQUE ("team_id", "user_id", "deleted_at")
 );
 
 CREATE TABLE "workouts" (
@@ -62,11 +63,12 @@ CREATE TABLE "workouts" (
 );
 
 CREATE TABLE "workout_teams" (
+  "id" uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   "team_id" uuid NOT NULL,
   "workout_id" uuid NOT NULL,
   "created_at" timestamp DEFAULT now(),
   "deleted_at" timestamp DEFAULT NULL,
-  PRIMARY KEY ("user_id", "workout_id", "deleted_at")
+  CONSTRAINT "unique_active_workout_team" UNIQUE ("team_id", "workout_id", "deleted_at")
 );
 
 ALTER TABLE "teams" ADD FOREIGN KEY ("coach_id") REFERENCES "users" ("id");
@@ -83,6 +85,6 @@ ALTER TABLE "team_users" ADD FOREIGN KEY ("team_id") REFERENCES "teams" ("id");
 
 ALTER TABLE "team_users" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
-ALTER TABLE "workout_users" ADD FOREIGN KEY ("workout_id") REFERENCES "workouts" ("id");
+ALTER TABLE "workout_teams" ADD FOREIGN KEY ("team_id") REFERENCES "teams" ("id");
 
-ALTER TABLE "workout_users" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "workout_teams" ADD FOREIGN KEY ("workout_id") REFERENCES "workouts" ("id");
