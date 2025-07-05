@@ -70,10 +70,10 @@ class UserModel
     global $pdo;
 
     if ($password) {
-      $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ?, password = ? WHERE id = ?");
+      $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ?, password = ?, updated_at = NOW() WHERE id = ?");
       $stmt->execute([$name, $role->toString(), password_hash($password, PASSWORD_DEFAULT), $id]);
     } else {
-      $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ? WHERE id = ?");
+      $stmt = $pdo->prepare("UPDATE users SET name = ?, role = ?, updated_at = NOW() WHERE id = ?");
       $stmt->execute([$name, $role->toString(), $id]);
     }
   }

@@ -35,7 +35,7 @@ class WorkoutModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("UPDATE workouts SET name = ?, description = ?, scheduled_at = ? WHERE id = ?");
+        $stmt = $pdo->prepare("UPDATE workouts SET name = ?, description = ?, scheduled_at = ?, updated_at = NOW() WHERE id = ?");
         $stmt->execute([$name, $description, $scheduled_at->format('Y-m-d H:i:s'), $id]);
     }
 

@@ -35,7 +35,7 @@ class TeamModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("UPDATE teams SET name = ? WHERE id = ?");
+        $stmt = $pdo->prepare("UPDATE teams SET name = ?, updated_at = NOW() WHERE id = ?");
         $stmt->execute([$name, $id]);
     }
 
