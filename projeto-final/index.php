@@ -61,8 +61,18 @@ $routes = [
       "public" => false,
     ],
     '/treinos' => [
-      "view" => "workouts.view.php",
+      "view" => "workouts/index.view.php",
       "title" => "Treinos",
+      "public" => false,
+    ],
+    '/treinos/novo' => [
+      "view" => "workouts/create.view.php",
+      "title" => "Criar treino",
+      "public" => false,
+    ],
+    '/treinos/:id' => [
+      "view" => "workouts/edit.view.php",
+      "title" => "Editar treino",
       "public" => false,
     ],
   ],
@@ -128,6 +138,27 @@ $routes = [
         return TeamController::delete($id);
       },
       "title" => "Deletar time",
+      "public" => false,
+    ],
+    '/treinos/:id' => [
+      "perform" => function ($id) {
+        return WorkoutController::update($id);
+      },
+      "title" => "Editar treino",
+      "public" => false,
+    ],
+    '/treinos/novo' => [
+      "perform" => function () {
+        return WorkoutController::create();
+      },
+      "title" => "Criar treino",
+      "public" => false,
+    ],
+    '/treinos/:id/delete' => [
+      "perform" => function ($id) {
+        return WorkoutController::delete($id);
+      },
+      "title" => "Deletar treino",
       "public" => false,
     ],
   ],

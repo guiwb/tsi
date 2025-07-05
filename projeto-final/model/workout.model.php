@@ -21,22 +21,22 @@ class WorkoutModel
         return $stmt->fetchAll();
     }
 
-    static function create(string $name, string $description, string $environment_id): string
+    static function create(string $name, string $description, DateTime $scheduled_at, string $coach_id, string $environment_id): string
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("INSERT INTO workouts (name, description, environment_id) VALUES (?, ?, ?) RETURNING id");
-        $stmt->execute([$name, $description, $environment_id]);
+        $stmt = $pdo->prepare("INSERT INTO workouts (name, description, scheduled_at, coach_id, environment_id) VALUES (?, ?, ?, ?, ?) RETURNING id");
+        $stmt->execute([$name, $description, $scheduled_at->format('Y-m-d H:i:s'), $coach_id, $environment_id]);
 
         return $stmt->fetchColumn();
     }
 
-    static function update(string $id, string $name, string $description): void
+    static function update(string $id, string $name, string $description, DateTime $scheduled_at): void
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("UPDATE workouts SET name = ?, description = ? WHERE id = ?");
-        $stmt->execute([$name, $description, $id]);
+        $stmt = $pdo->prepare("UPDATE workouts SET name = ?, description = ?, scheduled_at = ? WHERE id = ?");
+        $stmt->execute([$name, $description, $scheduled_at->format('Y-m-d H:i:s'), $id]);
     }
 
     static function delete(string $id): void
