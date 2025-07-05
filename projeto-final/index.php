@@ -30,6 +30,11 @@ $routes = [
       "title" => "Usuários",
       "public" => false,
     ],
+    '/usuarios/novo' => [
+      "view" => "users/create.view.php",
+      "title" => "Criar usuário",
+      "public" => false,
+    ],
     '/usuarios/:id' => [
       "view" => "users/edit.view.php",
       "title" => "Editar usuário",
@@ -72,10 +77,16 @@ $routes = [
       "perform" => function ($id) {
         return UserController::update($id);
       },
-      "title" => "Logout",
+      "title" => "Editar usuário",
       "public" => false,
     ],
-
+    '/usuarios/novo' => [
+      "perform" => function () {
+        return UserController::create();
+      },
+      "title" => "Criar usuário",
+      "public" => false,
+    ],
     '/usuarios/:id/delete' => [
       "perform" => function ($id) {
         return UserController::delete($id);

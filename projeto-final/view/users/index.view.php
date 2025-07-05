@@ -1,6 +1,10 @@
-<ul class="breadcrumb">
-    <li>Usuários</li>
-</ul>
+<header>
+    <ul class="breadcrumb">
+        <li>Usuários</li>
+    </ul>
+
+    <a href="/usuarios/novo" class="button small with-icon"><span class="material-symbols-outlined">add_circle</span> Novo usuário</a>
+</header>
 
 <table>
     <thead>
@@ -46,6 +50,12 @@
 </table>
 
 <style>
+    header {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
     td:first-child {
         display: flex;
         align-items: center;

@@ -93,6 +93,36 @@ class UserController
         exit;
     }
 
+    static function create(): never
+    {
+        $name = $_POST['name'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
+        $confirm_password = $_POST['confirm_password'] ?? null;
+        $role = $_POST['role'] ?? null;
+
+        if (!$name || !$email || !$password || !$role) {
+            self::throwError('Todos os campos são obrigatórios!');
+        }
+
+        if ($password !== $confirm_password) {
+            self::throwError('As senhas não conferem!');
+        }
+
+        $user = UserModel::findByEmail($email);
+
+        if ($user) {
+            self::throwError('O e-mail já está em uso!');
+        }
+
+        $userId = UserModel::create($name, $email, $password, $_SESSION['user']['environment_id'], UserRole::fromString($role));
+
+        $_SESSION['toast_success'] = "Usuário criado com sucesso!";
+
+        header('Location: /usuarios');
+        exit;
+    }
+
     private static function throwError(string $message): never
     {
         $_SESSION['toast_error'] = $message;

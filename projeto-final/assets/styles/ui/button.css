@@ -1,4 +1,4 @@
-button {
+button, .button {
     display: flex;
     align-items: center;
     width: auto;
@@ -12,21 +12,26 @@ button {
     background: linear-gradient(90deg, #9181F4 0%, #5038ED 100%);
 }
 
-button.danger {
+button.danger, .button.danger {
     background: linear-gradient(90deg, #FA6449, #FC5451, #FD147B);
 }
 
-button.small {
+button.small, .button.small {
     padding: 10px 20px;
     font-size: 12px;
 }
 
-button.rounded {
+button.rounded, .button.rounded {
     border-radius: 50px;
 }
 
-button.navy {
+button.navy, .button.navy {
     background: rgba(0, 0, 0, 0.3);
+}
+
+button.with-icon, .button.with-icon {
+    gap: 5px;
+    padding-left: 15px;
 }
 
 .button-link {

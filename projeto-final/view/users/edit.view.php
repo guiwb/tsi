@@ -24,7 +24,7 @@ if (!$user) {
     </div>
 
     <div class="input-group">
-        <label for="role">Cargo</label>
+        <label for="role">Papel</label>
         <select id="role" name="role" required>
             <option value="admin" <?= $user['role'] == 'admin' ? 'selected' : '' ?>>Administrador</option>
             <option value="coach" <?= $user['role'] == 'coach' ? 'selected' : '' ?>>Treinador</option>
