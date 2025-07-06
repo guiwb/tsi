@@ -3,6 +3,15 @@ include_once 'database/connection.php';
 
 class TeamModel
 {
+    static function getTotalTeams(): int
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM teams WHERE deleted_at IS NULL");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
     static function findById(string $id): mixed
     {
         global $pdo;

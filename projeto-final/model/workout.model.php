@@ -3,6 +3,15 @@ include_once 'database/connection.php';
 
 class WorkoutModel
 {
+    static function getTotalWorkouts(): int
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM workouts WHERE deleted_at IS NULL");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
     static function findById(string $id): mixed
     {
         global $pdo;

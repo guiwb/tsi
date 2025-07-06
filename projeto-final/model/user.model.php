@@ -28,6 +28,15 @@ enum UserRole
 
 class UserModel
 {
+  static function getTotalUsers(): int
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE deleted_at IS NULL");
+    $stmt->execute();
+    return $stmt->fetchColumn();
+  }
+
   static function findByEmail(string $email): mixed
   {
     global $pdo;

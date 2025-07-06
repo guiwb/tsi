@@ -18,7 +18,7 @@
                 <span class="material-symbols-outlined">people</span>
             </div>
             <div class="metric-content">
-                <h3 class="metric-value"><?= count(UserController::list(0, 1000)) ?? 0 ?></h3>
+                <h3 class="metric-value"><?= UserModel::getTotalUsers() ?></h3>
                 <p class="metric-label">Usuários Ativos</p>
             </div>
             <div class="metric-trend positive">
@@ -32,7 +32,7 @@
                 <span class="material-symbols-outlined">groups</span>
             </div>
             <div class="metric-content">
-                <h3 class="metric-value"><?= count(TeamController::list(0, 1000)) ?? 0 ?></h3>
+                <h3 class="metric-value"><?= TeamModel::getTotalTeams() ?></h3>
                 <p class="metric-label">Equipes</p>
             </div>
             <div class="metric-trend positive">
@@ -46,7 +46,7 @@
                 <span class="material-symbols-outlined">fitness_center</span>
             </div>
             <div class="metric-content">
-                <h3 class="metric-value"><?= count(WorkoutController::list(0, 1000)) ?? 0 ?></h3>
+                <h3 class="metric-value"><?= WorkoutModel::getTotalWorkouts() ?></h3>
                 <p class="metric-label">Treinos</p>
             </div>
             <div class="metric-trend positive">
