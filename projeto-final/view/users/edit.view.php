@@ -66,9 +66,9 @@ if (!$user) {
                         Papel/Função
                     </label>
                     <select id="role" name="role" required>
-                        <option value="admin" <?= $user['role'] == ADMIN ? 'selected' : '' ?>>Administrador</option>
-                        <option value="coach" <?= $user['role'] == COACH ? 'selected' : '' ?>>Treinador</option>
-                        <option value="athlete" <?= $user['role'] == ATHLETE ? 'selected' : '' ?>>Atleta</option>
+                        <option value="ADMIN" <?= $user['role'] == UserRole::ADMIN->toString() ? 'selected' : '' ?>>Administrador</option>
+                        <option value="COACH" <?= $user['role'] == UserRole::COACH->toString() ? 'selected' : '' ?>>Treinador</option>
+                        <option value="ATHLETE" <?= $user['role'] == UserRole::ATHLETE->toString() ? 'selected' : '' ?>>Atleta</option>
                     </select>
                 </div>
             </div>

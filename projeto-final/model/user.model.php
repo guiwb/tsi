@@ -10,18 +10,18 @@ enum UserRole
   public function toString(): string
   {
     return match ($this) {
-      self::ADMIN => ADMIN,
-      self::COACH => COACH,
-      self::ATHLETE => ATHLETE,
+      self::ADMIN => 'ADMIN',
+      self::COACH => 'COACH',
+      self::ATHLETE => 'ATHLETE',
     };
   }
 
   public static function fromString(string $role): self
   {
     return match ($role) {
-      ADMIN => self::ADMIN,
-      COACH => self::COACH,
-      ATHLETE => self::ATHLETE
+      'ADMIN' => self::ADMIN,
+      'COACH' => self::COACH,
+      'ATHLETE' => self::ATHLETE
     };
   }
 }

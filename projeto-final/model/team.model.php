@@ -34,7 +34,7 @@ class TeamModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = ATHLETE AND deleted_at IS NULL");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = 'ATHLETE' AND deleted_at IS NULL");
         $stmt->execute([$teamId]);
         return $stmt->fetchAll();
     }
@@ -43,7 +43,7 @@ class TeamModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id NOT IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = ATHLETE AND deleted_at IS NULL");
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE id NOT IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = 'ATHLETE' AND deleted_at IS NULL");
         $stmt->execute([$teamId]);
         return $stmt->fetchAll();
     }

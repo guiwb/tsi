@@ -57,9 +57,9 @@
                     </label>
                     <select id="role" name="role" required>
                         <option value="">Selecione o papel</option>
-                        <option value="admin">Administrador</option>
-                        <option value="coach">Treinador</option>
-                        <option value="athlete">Atleta</option>
+                        <option value="ADMIN">Administrador</option>
+                        <option value="COACH">Treinador</option>
+                        <option value="ATHLETE">Atleta</option>
                     </select>
                 </div>
             </div>
