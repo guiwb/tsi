@@ -81,6 +81,7 @@ Table workout_section_series {
   distance_in_meters int [not null]
   repetitions int [not null]
   interval_in_seconds integer
+  intensity_zone "INTENSITY_ZONE" [not null]
   swimming_type "SWIMMING_TYPE" [not null]
   notes varchar
   created_at timestamp [default: `now()`]
@@ -89,19 +90,27 @@ Table workout_section_series {
 }
 
 enum USER_ROLE {
-  athlete
-  coach
-  admin
+  ATHLETE
+  COACH
+  ADMIN
 }
 
 enum SWIMMING_TYPE {
-  freestyle
-  crawl
-  backstroke
-  breaststroke
-  butterfly
-  medley
-  relay
+  FREESTYLE
+  CRAWL
+  BACKSTROKE
+  BREASTSTROKE
+  BUTTERFLY
+  MEDLEY
+  RELAY
+}
+
+enum INTENSITY_ZONE {
+  A1
+  A2
+  A3
+  AT
+  VO2
 }
 
 Ref: "teams"."coach_id" > "users"."id"

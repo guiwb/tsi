@@ -2,19 +2,27 @@ DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 
 CREATE TYPE "USER_ROLE" AS ENUM (
-  'athlete',
-  'coach',
-  'admin'
+  'ATHLETE',
+  'COACH',
+  'ADMIN'
 );
 
 CREATE TYPE "SWIMMING_TYPE" AS ENUM (
-  'freestyle',
-  'crawl',
-  'backstroke',
-  'breaststroke',
-  'butterfly',
-  'medley',
-  'relay'
+  'FREESTYLE',
+  'CRAWL',
+  'BACKSTROKE',
+  'BREASTSTROKE',
+  'BUTTERFLY',
+  'MEDLEY',
+  'RELAY'
+);
+
+CREATE TYPE "INTENSITY_ZONE" AS ENUM (
+  'A1',
+  'A2',
+  'A3',
+  'AT',
+  'VO2'
 );
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -96,6 +104,7 @@ CREATE TABLE "workout_section_series" (
   "distance_in_meters" integer NOT NULL,
   "repetitions" integer NOT NULL,
   "interval_in_seconds" integer NOT NULL,
+  "intensity_zone" "INTENSITY_ZONE" NOT NULL,
   "swimming_type" "SWIMMING_TYPE" NOT NULL,
   "notes" varchar,
   "created_at" timestamp DEFAULT now(),
