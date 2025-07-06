@@ -52,8 +52,19 @@ class WorkoutModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("UPDATE workouts SET deleted_at = NOW() WHERE id = ?");
-        $stmt->execute([$id]);
+        $pdo->beginTransaction();
+        try {
+            $stmt = $pdo->prepare("UPDATE workouts SET deleted_at = NOW() WHERE id = ?");
+            $stmt->execute([$id]);
+
+            $stmt = $pdo->prepare("UPDATE workout_teams SET deleted_at = NOW() WHERE workout_id = ?");
+            $stmt->execute([$id]);
+
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
     }
 
     static function addTeam(string $workout_id, string $team_id): void

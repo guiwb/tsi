@@ -91,7 +91,18 @@ class UserModel
   {
     global $pdo;
 
-    $stmt = $pdo->prepare("UPDATE users SET deleted_at = NOW() WHERE id = ?");
-    $stmt->execute([$id]);
+    $pdo->beginTransaction();
+    try {
+      $stmt = $pdo->prepare("UPDATE users SET deleted_at = NOW() WHERE id = ?");
+      $stmt->execute([$id]);
+
+      $stmt = $pdo->prepare("UPDATE team_users SET deleted_at = NOW() WHERE user_id = ?");
+      $stmt->execute([$id]);
+
+      $pdo->commit();
+    } catch (Exception $e) {
+      $pdo->rollBack();
+      throw $e;
+    }
   }
 }

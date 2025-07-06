@@ -25,7 +25,7 @@ class TeamModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("SELECT *, (select count(*) from team_users where team_id = teams.id) as total_athletes FROM teams WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
+        $stmt = $pdo->prepare("SELECT *, (select count(*) from team_users where team_id = teams.id AND deleted_at IS NULL) as total_athletes FROM teams WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
         $stmt->execute([$limit, $offset]);
         return $stmt->fetchAll();
     }
@@ -79,8 +79,22 @@ class TeamModel
     {
         global $pdo;
 
-        $stmt = $pdo->prepare("UPDATE teams SET deleted_at = NOW() WHERE id = ?");
-        $stmt->execute([$id]);
+        $pdo->beginTransaction();
+        try {
+            $stmt = $pdo->prepare("UPDATE teams SET deleted_at = NOW() WHERE id = ?");
+            $stmt->execute([$id]);
+
+            $stmt = $pdo->prepare("UPDATE team_users SET deleted_at = NOW() WHERE team_id = ?");
+            $stmt->execute([$id]);
+
+            $stmt = $pdo->prepare("UPDATE workout_teams SET deleted_at = NOW() WHERE team_id = ?");
+            $stmt->execute([$id]);
+
+            $pdo->commit();
+        } catch (Exception $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
     }
 
     static function addAthlete(string $team_id, string $athlete_id): void
