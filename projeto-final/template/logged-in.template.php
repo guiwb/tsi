@@ -12,6 +12,8 @@ define('BASE_URL', '/');
 
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/reset.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/design-system.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/components/forms.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/components/breadcrumb.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
