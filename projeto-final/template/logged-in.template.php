@@ -3,7 +3,7 @@ define('BASE_URL', '/');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -11,6 +11,7 @@ define('BASE_URL', '/');
   <title>Natare App - <?= $current_route['title'] ?></title>
 
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/reset.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/design-system.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/logged-in-form.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/button.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/breadcrumb.css">
@@ -24,45 +25,130 @@ define('BASE_URL', '/');
   <style>
     body {
       width: 100%;
-      height: 100vh;
-      font-family: "Poppins", sans-serif;
-      background-color: #f9f9f9;
+      min-height: 100vh;
+      font-family: var(--font-family);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .container {
-      width: 90%;
+      width: 95%;
+      max-width: 1400px;
       margin: 0 auto;
+      padding: var(--space-6) 0;
     }
 
-    @media (min-width: 640px) {
-      .container {
-        max-width: 640px;
-      }
+    .main-content {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-xl);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      min-height: calc(100vh - 3rem);
     }
 
-    @media (min-width: 768px) {
-      .container {
-        max-width: 768px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .container {
-        max-width: 1024px;
-      }
-    }
-
-    @media (min-width: 1280px) {
-      .container {
-        max-width: 1280px;
-      }
+    .content-wrapper {
+      padding: var(--space-8);
     }
 
     header {
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: var(--space-4);
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-8);
+      padding: var(--space-6);
+      background: linear-gradient(135deg, var(--primary-50) 0%, white 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--gray-100);
+    }
+
+    .page-title {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--gray-800);
+      margin: 0;
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      color: var(--gray-600);
+      font-size: var(--font-size-base);
+      margin: var(--space-2) 0 0 0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: 98%;
+        padding: var(--space-4) 0;
+      }
+      
+      .content-wrapper {
+        padding: var(--space-4);
+      }
+      
+      header {
+        flex-direction: column;
+        gap: var(--space-4);
+        text-align: center;
+      }
+      
+      .page-title {
+        font-size: var(--font-size-2xl);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-content {
+        border-radius: var(--radius-lg);
+      }
+      
+      .content-wrapper {
+        padding: var(--space-3);
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--gray-100);
+      border-radius: var(--radius-full);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, var(--primary-400) 0%, var(--primary-600) 100%);
+      border-radius: var(--radius-full);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
     }
   </style>
 </head>
@@ -71,12 +157,24 @@ define('BASE_URL', '/');
   <section class="container">
     <?php
     include 'view/components/toast.php';
-    include 'view/components/navbar.php';
-    include 'view/' . $current_route['view'];
     ?>
+    
+    <div class="main-content">
+      <?php
+      include 'view/components/navbar.php';
+      ?>
+      
+      <div class="content-wrapper">
+        <?php
+        include 'view/' . $current_route['view'];
+        ?>
+      </div>
+    </div>
   </section>
 
   <script src="<?= BASE_URL ?>assets/js/date-formatter.js"></script>
+  <script src="<?= BASE_URL ?>assets/js/icons.js"></script>
+  <script src="<?= BASE_URL ?>assets/js/animations.js"></script>
 </body>
 
 </html>
