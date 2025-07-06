@@ -31,10 +31,15 @@ Table teams {
 }
 
 Table team_users {
-  team_id uuid [not null, primary key]
-  user_id uuid [not null, primary key]
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  team_id uuid [not null]
+  user_id uuid [not null]
   created_at timestamp [default: `now()`]
   deleted_at timestamp [default: null]
+  
+  indexes {
+    (team_id, user_id, deleted_at) [unique, name: 'unique_active_team_user']
+  }
 }
 
 Table workouts {
@@ -49,11 +54,16 @@ Table workouts {
   deleted_at timestamp [default: null]
 }
 
-Table workout_users {
-  user_id uuid [not null, primary key]
-  workout_id uuid [not null, primary key]
+Table workout_teams {
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  team_id uuid [not null]
+  workout_id uuid [not null]
   created_at timestamp [default: `now()`]
   deleted_at timestamp [default: null]
+  
+  indexes {
+    (team_id, workout_id, deleted_at) [unique, name: 'unique_active_workout_team']
+  }
 }
 
 enum USER_ROLE {
@@ -76,6 +86,6 @@ Ref: "teams"."id" < "team_users"."team_id"
 
 Ref: "users"."id" < "team_users"."user_id"
 
-Ref: "workouts"."id" < "workout_users"."workout_id"
+Ref: "teams"."id" < "workout_teams"."team_id"
 
-Ref: "users"."id" < "workout_users"."user_id"
+Ref: "workouts"."id" < "workout_teams"."workout_id"
