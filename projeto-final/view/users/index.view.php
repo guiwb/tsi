@@ -294,12 +294,6 @@
             gap: var(--space-4);
         }
         
-        .user-card .card-header {
-            flex-direction: column;
-            text-align: center;
-            gap: var(--space-4);
-        }
-        
         .user-avatar {
             margin-right: 0;
         }

@@ -12,10 +12,6 @@ define('BASE_URL', '/');
 
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/reset.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/design-system.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/logged-in-form.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/button.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/breadcrumb.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>assets/styles/ui/table.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
