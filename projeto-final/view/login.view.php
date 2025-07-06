@@ -53,7 +53,7 @@
         align-items: center;
         min-height: 100vh;
         padding: var(--space-6);
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
         position: relative;
         overflow: hidden;
     }
@@ -66,9 +66,9 @@
         width: 100%;
         height: 100%;
         background: 
-            radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.2) 0%, transparent 50%);
         pointer-events: none;
         z-index: 0;
     }

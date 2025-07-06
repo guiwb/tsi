@@ -61,17 +61,17 @@ Este diretório contém componentes CSS reutilizáveis para manter consistência
 - `.form-container.wide` - Container largo (max-width: 1200px)
 
 #### Título
-- `.title-icon.primary` - Ícone azul/roxo
+- `.title-icon.primary` - Ícone azul
 - `.title-icon.success` - Ícone verde
 - `.title-icon.info` - Ícone azul
 
 #### Seções
-- `.section-title.primary` - Título da seção azul/roxo
+- `.section-title.primary` - Título da seção azul
 - `.section-title.success` - Título da seção verde
 - `.section-title.info` - Título da seção azul
 
 #### Campos
-- `.input-group.primary` - Campo azul/roxo
+- `.input-group.primary` - Campo azul
 - `.input-group.success` - Campo verde
 - `.input-group.info` - Campo azul
 
@@ -102,7 +102,7 @@ Este diretório contém componentes CSS reutilizáveis para manter consistência
 ### Classes Disponíveis
 
 #### Item Ativo
-- `.breadcrumb-item.active.primary` - Item ativo azul/roxo
+- `.breadcrumb-item.active.primary` - Item ativo azul
 - `.breadcrumb-item.active.success` - Item ativo verde
 - `.breadcrumb-item.active.info` - Item ativo azul
 
@@ -116,7 +116,7 @@ Este diretório contém componentes CSS reutilizáveis para manter consistência
 
 2. **Use as classes apropriadas** para o contexto:
    - **Equipes e Treinos**: Use `.success` (verde)
-   - **Usuários**: Use `.primary` (azul/roxo)
+   - **Usuários**: Use `.primary` (azul)
    - **Configurações**: Use `.info` (azul)
 
 3. **Mantenha a estrutura HTML** conforme documentado acima

@@ -69,7 +69,7 @@ projeto-final/
 
 ### Cores
 ```css
---primary-500: #5038ed    /* Cor principal */
+--primary-500: #3b82f6    /* Cor principal */
 --success-500: #22c55e    /* Sucesso */
 --warning-500: #f59e0b    /* Aviso */
 --danger-500: #ef4444     /* Erro */
