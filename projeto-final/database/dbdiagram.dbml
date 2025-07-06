@@ -66,10 +66,42 @@ Table workout_teams {
   }
 }
 
+Table workout_sections {
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  workout_id uuid [not null]
+  name varchar [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
+Table workout_section_series {
+  id uuid [primary key, default: `uuid_generate_v4()`]
+  workout_section_id uuid [not null]
+  distance_in_meters int [not null]
+  repetitions int [not null]
+  interval_in_seconds integer
+  swimming_type "SWIMMING_TYPE" [not null]
+  notes varchar
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  deleted_at timestamp [default: null]
+}
+
 enum USER_ROLE {
   athlete
   coach
   admin
+}
+
+enum SWIMMING_TYPE {
+  freestyle
+  crawl
+  backstroke
+  breaststroke
+  butterfly
+  medley
+  relay
 }
 
 Ref: "teams"."coach_id" > "users"."id"
@@ -89,3 +121,7 @@ Ref: "users"."id" < "team_users"."user_id"
 Ref: "teams"."id" < "workout_teams"."team_id"
 
 Ref: "workouts"."id" < "workout_teams"."workout_id"
+
+Ref: "workouts"."id" < "workout_sections"."workout_id"
+
+Ref: "workout_sections"."id" < "workout_section_series"."workout_section_id"

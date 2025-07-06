@@ -7,6 +7,16 @@ CREATE TYPE "USER_ROLE" AS ENUM (
   'admin'
 );
 
+CREATE TYPE "SWIMMING_TYPE" AS ENUM (
+  'freestyle',
+  'crawl',
+  'backstroke',
+  'breaststroke',
+  'butterfly',
+  'medley',
+  'relay'
+);
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE "environments" (
@@ -71,6 +81,28 @@ CREATE TABLE "workout_teams" (
   CONSTRAINT "unique_active_workout_team" UNIQUE ("team_id", "workout_id", "deleted_at")
 );
 
+CREATE TABLE "workout_sections" (
+  "id" uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  "workout_id" uuid NOT NULL,
+  "name" varchar NOT NULL,
+  "created_at" timestamp DEFAULT now(),
+  "updated_at" timestamp DEFAULT now(),
+  "deleted_at" timestamp DEFAULT NULL
+);
+
+CREATE TABLE "workout_section_series" (
+  "id" uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  "workout_section_id" uuid NOT NULL,
+  "distance_in_meters" integer NOT NULL,
+  "repetitions" integer NOT NULL,
+  "interval_in_seconds" integer NOT NULL,
+  "swimming_type" "SWIMMING_TYPE" NOT NULL,
+  "notes" varchar,
+  "created_at" timestamp DEFAULT now(),
+  "updated_at" timestamp DEFAULT now(),
+  "deleted_at" timestamp DEFAULT NULL
+);
+
 ALTER TABLE "teams" ADD FOREIGN KEY ("coach_id") REFERENCES "users" ("id");
 
 ALTER TABLE "users" ADD FOREIGN KEY ("environment_id") REFERENCES "environments" ("id");
@@ -88,3 +120,7 @@ ALTER TABLE "team_users" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "workout_teams" ADD FOREIGN KEY ("team_id") REFERENCES "teams" ("id");
 
 ALTER TABLE "workout_teams" ADD FOREIGN KEY ("workout_id") REFERENCES "workouts" ("id");
+
+ALTER TABLE "workout_sections" ADD FOREIGN KEY ("workout_id") REFERENCES "workouts" ("id");
+
+ALTER TABLE "workout_section_series" ADD FOREIGN KEY ("workout_section_id") REFERENCES "workout_sections" ("id");
