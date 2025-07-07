@@ -24,7 +24,7 @@ class TeamModel
     static function getTotalAthletesOutOfTeam(string $teamId): int
     {
         $total_athletes_on_team = self::getTotalAthletes($teamId);
-        $total_users = UserModel::getTotalUsers();
+        $total_users = UserModel::getTotalUsersByRole(UserRole::ATHLETE);
 
         return $total_users - $total_athletes_on_team;
     }

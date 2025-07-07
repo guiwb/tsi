@@ -189,6 +189,10 @@ $uuid_pattern = '/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9
 $uri = preg_replace($uuid_pattern, ':param', $_SERVER['REQUEST_URI']);
 $params = preg_match_all($uuid_pattern, $_SERVER['REQUEST_URI'], $matches) ? $matches[0] : null;
 
+if ($uri && strpos($uri, '?') !== false) {
+  $uri = strstr($uri, '?', true);
+}
+
 $GLOBALS['current_route'] = $routes[$method][$uri] ?? $routes['NOT_FOUND'];
 $GLOBALS['current_route']['params'] = $params;
 

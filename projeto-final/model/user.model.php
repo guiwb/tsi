@@ -46,6 +46,15 @@ class UserModel
     return $stmt->fetchColumn();
   }
 
+  static function getTotalUsersByRole(UserRole $role): int
+  {
+    global $pdo;
+
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE role = ? AND deleted_at IS NULL");
+    $stmt->execute([$role->toString()]);
+    return $stmt->fetchColumn();
+  }
+
   static function findByEmail(string $email): mixed
   {
     global $pdo;

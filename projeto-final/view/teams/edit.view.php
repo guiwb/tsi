@@ -78,15 +78,28 @@ if (!$team) {
             </div>
 
             <div class="athletes-list">
-                <?php
-                $athletes = AthleteModel::listAthletesByTeamId($team['id']);
+                <form class="input-group success" method="GET" action="/equipes/<?= $team['id'] ?>?search_out_of_team=<?= $_GET['search_out_of_team'] ?? '' ?>">
+                    <input type="text" id="search" name="search_on_team" value="<?= $_GET['search_on_team'] ?? '' ?>" placeholder="Busque o usuário pelo nome">
+                </form>
 
-                if (count($athletes) === 0) {
+                <?php
+                $search_text = $_GET['search_on_team'] ?? '';
+
+                $athletes = AthleteModel::listAthletesByTeamId($team['id'], $search_text);
+
+                if (count($athletes) === 0 && empty($search_text)) {
                     echo '<div class="empty-athletes">
                             <div class="empty-icon">
                                 <span class="material-symbols-outlined">person_off</span>
                             </div>
                             <p>Nenhum atleta na equipe</p>
+                          </div>';
+                } else if (!empty($search_text)) {
+                    echo '<div class="empty-athletes">
+                            <div class="empty-icon">
+                                <span class="material-symbols-outlined">person_off</span>
+                            </div>
+                            <p>Nenhum atleta encontrado</p>
                           </div>';
                 } else {
                     foreach ($athletes as $athlete) {
@@ -120,15 +133,28 @@ if (!$team) {
             </div>
 
             <div class="athletes-list">
-                <?php
-                $athletes = AthleteModel::listAthletesOutOfTeamId($team['id']);
+                <form class="input-group success" method="GET" action="/equipes/<?= $team['id'] ?>?search_on_team=<?= $_GET['search_on_team'] ?? '' ?>">
+                    <input type="text" id="search" name="search_out_of_team" value="<?= $_GET['search_out_of_team'] ?? '' ?>" placeholder="Busque o usuário pelo nome">
+                </form>
 
-                if (count($athletes) === 0) {
+                <?php
+                $search_text = $_GET['search_out_of_team'] ?? '';
+
+                $athletes = AthleteModel::listAthletesOutOfTeamId($team['id'], $search_text);
+
+                if (count($athletes) === 0 && empty($search_text)) {
                     echo '<div class="empty-athletes">
                             <div class="empty-icon">
                                 <span class="material-symbols-outlined">check_circle</span>
                             </div>
                             <p>Todos os atletas já estão na equipe</p>
+                          </div>';
+                } else if (!empty($search_text)) {
+                    echo '<div class="empty-athletes">
+                            <div class="empty-icon">
+                                <span class="material-symbols-outlined">person_off</span>
+                            </div>
+                            <p>Nenhum atleta encontrado</p>
                           </div>';
                 } else {
                     foreach ($athletes as $athlete) {
