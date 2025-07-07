@@ -36,7 +36,14 @@ class UserController
 
     static function list(int $offset, int $limit): array
     {
-        return UserModel::list($offset, $limit);
+        $total_users = UserModel::getTotalUsers();
+
+        return [
+            'list' => UserModel::list($offset, $limit),
+            'total' => $total_users,
+            'offset' => $offset,
+            'limit' => $limit,
+        ];
     }
 
     static function update(string $id): never

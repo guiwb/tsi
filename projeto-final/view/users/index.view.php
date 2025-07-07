@@ -13,9 +13,13 @@
 
 <div class="users-grid">
     <?php
-    $users = UserController::list(0, 10);
+    $limit = 9;
+    $page = $_GET['page'] ?? 1;
+    $offset = ($page - 1) * $limit;
 
-    if (!isset($users) || count($users) === 0) {
+    $result = UserController::list($offset, $limit);
+
+    if ($result['total'] === 0) {
         echo '<div class="empty-state">
                 <div class="empty-icon">
                     <span class="material-symbols-outlined">people</span>
@@ -30,7 +34,7 @@
         return;
     }
 
-    foreach ($users as $user) {
+    foreach ($result['list'] as $user) {
     ?>
         <div class="user-card card">
             <div class="card-header">
@@ -86,7 +90,47 @@
     ?>
 </div>
 
+<?php
+
+
+$total_pages = ceil($result['total'] / $result['limit']);
+$current_page = ($result['offset'] / $result['limit']) + 1;
+
+if ($total_pages > 1) {
+?>
+    <div class="pagination">
+        <?php
+        for ($i = 1; $i <= $total_pages; $i++) {
+            $page = $i;
+
+            if ($page == $current_page) {
+                echo '<span class="btn btn-secondary active">' . $page . '</span>';
+            } else {
+                echo '<a href="/usuarios?page=' . $page . '" class="btn btn-secondary">' . $page . '</a>';
+            }
+        }
+        ?>
+    </div>
+<?php
+}
+?>
+
 <style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-2);
+        margin-top: var(--space-8);
+        flex: 3;
+    }
+
+    .btn.active {
+        background-color: var(--primary-500);
+        color: white;
+        cursor: default;
+    }
+
     .header-info {
         flex: 1;
     }
