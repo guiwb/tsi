@@ -44,7 +44,6 @@ projeto-final/
 │   │   ├── reset.css              # Reset CSS
 │   │   └── ui/                    # Componentes UI
 │   ├── js/
-│   │   ├── animations.js          # Animações e interações
 │   │   ├── icons.js               # Ícones personalizados
 │   │   └── date-formatter.js      # Formatação de datas
 │   └── images/                    # Imagens e assets

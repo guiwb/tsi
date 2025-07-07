@@ -45,7 +45,7 @@
                     <span class="badge badge-info">Agendado</span>
                 </div>
             </div>
-            
+
             <div class="card-body">
                 <div class="workout-details">
                     <div class="detail-item">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="card-footer">
                 <div class="action-buttons">
                     <a href="/treinos/<?= $workout['id'] ?>" class="btn btn-secondary btn-sm" title="Editar treino">
@@ -86,13 +86,6 @@
 </div>
 
 <style>
-    .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: var(--space-6);
-    }
-
     .header-info {
         flex: 1;
     }
@@ -162,10 +155,13 @@
     }
 
     @keyframes pulse {
-        0%, 100% {
+
+        0%,
+        100% {
             opacity: 1;
             transform: scale(1);
         }
+
         50% {
             opacity: 0.7;
             transform: scale(1.1);
@@ -291,20 +287,15 @@
     }
 
     @media (max-width: 768px) {
-        .header-content {
-            flex-direction: column;
-            gap: var(--space-4);
-        }
-        
         .workouts-grid {
             grid-template-columns: 1fr;
             gap: var(--space-4);
         }
-        
+
         .workout-avatar {
             margin-right: 0;
         }
-        
+
         .action-buttons {
             flex-direction: column;
         }
@@ -314,11 +305,11 @@
         .workouts-grid {
             gap: var(--space-3);
         }
-        
+
         .workout-card {
             margin: 0 var(--space-2);
         }
-        
+
         .empty-state {
             padding: var(--space-8) var(--space-4);
         }

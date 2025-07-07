@@ -37,7 +37,7 @@ define('BASE_URL', '/');
       left: 0;
       width: 100%;
       height: 100%;
-      background: 
+      background:
         radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(30, 64, 175, 0.3) 0%, transparent 50%),
         radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.2) 0%, transparent 50%);
@@ -101,17 +101,17 @@ define('BASE_URL', '/');
         width: 98%;
         padding: var(--space-4) 0;
       }
-      
+
       .content-wrapper {
         padding: var(--space-4);
       }
-      
+
       header {
         flex-direction: column;
         gap: var(--space-4);
         text-align: center;
       }
-      
+
       .page-title {
         font-size: var(--font-size-2xl);
       }
@@ -121,7 +121,7 @@ define('BASE_URL', '/');
       .main-content {
         border-radius: var(--radius-lg);
       }
-      
+
       .content-wrapper {
         padding: var(--space-3);
       }
@@ -156,12 +156,12 @@ define('BASE_URL', '/');
     <?php
     include 'view/components/toast.php';
     ?>
-    
+
     <div class="main-content">
       <?php
       include 'view/components/navbar.php';
       ?>
-      
+
       <div class="content-wrapper">
         <?php
         include 'view/' . $current_route['view'];
@@ -172,7 +172,6 @@ define('BASE_URL', '/');
 
   <script src="<?= BASE_URL ?>assets/js/date-formatter.js"></script>
   <script src="<?= BASE_URL ?>assets/js/icons.js"></script>
-  <script src="<?= BASE_URL ?>assets/js/animations.js"></script>
 </body>
 
 </html>

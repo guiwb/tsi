@@ -42,7 +42,7 @@ if (!$team) {
                     <span class="material-symbols-outlined">info</span>
                     Informações Básicas
                 </h3>
-                
+
                 <div class="input-group success">
                     <label for="name">
                         <span class="material-symbols-outlined">label</span>
@@ -74,7 +74,7 @@ if (!$team) {
                 </h3>
                 <span class="athlete-count"><?= count(TeamModel::listAthletes($team['id'])) ?> atletas</span>
             </div>
-            
+
             <div class="athletes-list">
                 <?php
                 $athletes = TeamModel::listAthletes($team['id']);
@@ -116,7 +116,7 @@ if (!$team) {
                 </h3>
                 <span class="athlete-count"><?= count(TeamModel::listNonAthletes($team['id'])) ?> disponíveis</span>
             </div>
-            
+
             <div class="athletes-list">
                 <?php
                 $athletes = TeamModel::listNonAthletes($team['id']);
@@ -164,14 +164,6 @@ if (!$team) {
         border-radius: var(--radius-xl);
         box-shadow: var(--shadow-lg);
         overflow: hidden;
-    }
-
-    .management-card .card-header {
-        padding: var(--space-6);
-        border-bottom: 2px solid var(--gray-100);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
     }
 
     .athlete-count {
@@ -259,12 +251,6 @@ if (!$team) {
     }
 
     @media (max-width: 480px) {
-        .management-card .card-header {
-            flex-direction: column;
-            gap: var(--space-3);
-            text-align: center;
-        }
-        
         .athlete-item {
             flex-direction: column;
             gap: var(--space-3);

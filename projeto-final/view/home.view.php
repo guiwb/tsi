@@ -75,7 +75,7 @@
             <span class="material-symbols-outlined">bolt</span>
             Ações Rápidas
         </h2>
-        
+
         <div class="actions-grid">
             <a href="/usuarios/novo" class="action-card card">
                 <div class="action-icon">
@@ -136,7 +136,7 @@
             <span class="material-symbols-outlined">history</span>
             Atividade Recente
         </h2>
-        
+
         <div class="activity-list">
             <div class="activity-item">
                 <div class="activity-icon">
@@ -192,9 +192,19 @@
     }
 
     @keyframes wave {
-        0%, 100% { transform: rotate(0deg); }
-        25% { transform: rotate(20deg); }
-        75% { transform: rotate(-20deg); }
+
+        0%,
+        100% {
+            transform: rotate(0deg);
+        }
+
+        25% {
+            transform: rotate(20deg);
+        }
+
+        75% {
+            transform: rotate(-20deg);
+        }
     }
 
     .dashboard {
@@ -469,26 +479,21 @@
     }
 
     @media (max-width: 768px) {
-        .header-content {
-            flex-direction: column;
-            gap: var(--space-4);
-        }
-        
         .metrics-grid {
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: var(--space-4);
         }
-        
+
         .actions-grid {
             grid-template-columns: 1fr;
         }
-        
+
         .metric-card {
             flex-direction: column;
             text-align: center;
             gap: var(--space-3);
         }
-        
+
         .metric-trend {
             align-self: center;
         }
@@ -498,17 +503,17 @@
         .dashboard {
             gap: var(--space-6);
         }
-        
+
         .metrics-grid {
             grid-template-columns: 1fr;
         }
-        
+
         .action-card {
             flex-direction: column;
             text-align: center;
             gap: var(--space-3);
         }
-        
+
         .action-arrow {
             display: none;
         }
