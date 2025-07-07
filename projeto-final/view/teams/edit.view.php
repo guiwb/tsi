@@ -1,4 +1,6 @@
 <?php
+include_once 'model/athlete.model.php';
+
 $team = TeamModel::findById($current_route['params'][0]);
 
 if (!$team) {
@@ -72,12 +74,12 @@ if (!$team) {
                     <span class="material-symbols-outlined">people</span>
                     Atletas da Equipe
                 </h3>
-                <span class="athlete-count"><?= count(TeamModel::listAthletes($team['id'])) ?> atletas</span>
+                <span class="athlete-count"><?= TeamModel::getTotalAthletes($team['id']) ?> atletas</span>
             </div>
 
             <div class="athletes-list">
                 <?php
-                $athletes = TeamModel::listAthletes($team['id']);
+                $athletes = AthleteModel::listAthletesByTeamId($team['id']);
 
                 if (count($athletes) === 0) {
                     echo '<div class="empty-athletes">
@@ -114,12 +116,12 @@ if (!$team) {
                     <span class="material-symbols-outlined">person_add</span>
                     Adicionar Atletas
                 </h3>
-                <span class="athlete-count"><?= count(TeamModel::listNonAthletes($team['id'])) ?> disponíveis</span>
+                <span class="athlete-count"><?= TeamModel::getTotalAthletesOutOfTeam($team['id']) ?> disponíveis</span>
             </div>
 
             <div class="athletes-list">
                 <?php
-                $athletes = TeamModel::listNonAthletes($team['id']);
+                $athletes = AthleteModel::listAthletesOutOfTeamId($team['id']);
 
                 if (count($athletes) === 0) {
                     echo '<div class="empty-athletes">
@@ -251,6 +253,7 @@ if (!$team) {
     }
 
     @media (max-width: 480px) {
+
         .athlete-item {
             flex-direction: column;
             gap: var(--space-3);

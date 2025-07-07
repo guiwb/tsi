@@ -42,7 +42,7 @@ if (!$user) {
                     <span class="material-symbols-outlined">info</span>
                     Informações Pessoais
                 </h3>
-                
+
                 <div class="input-group primary">
                     <label for="name">
                         <span class="material-symbols-outlined">person</span>
@@ -78,12 +78,12 @@ if (!$user) {
                     <span class="material-symbols-outlined">security</span>
                     Alterar Senha
                 </h3>
-                
+
                 <div class="password-note">
                     <span class="material-symbols-outlined">info</span>
                     <p>Deixe os campos de senha em branco para manter a senha atual</p>
                 </div>
-                
+
                 <div class="input-group primary">
                     <label for="password">
                         <span class="material-symbols-outlined">lock</span>

@@ -42,7 +42,6 @@
                 <div class="workout-info">
                     <h3 class="workout-name"><?= $workout['name'] ?></h3>
                     <p class="workout-description"><?= $workout['description'] ?? 'Treino de natação' ?></p>
-                    <span class="badge badge-info">Agendado</span>
                 </div>
             </div>
 
@@ -98,6 +97,9 @@
     }
 
     .workout-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         transition: all var(--transition-normal);
         border: 1px solid var(--gray-100);
     }

@@ -16,6 +16,15 @@ enum UserRole
     };
   }
 
+  static public function fromStringToLabel(string $role): string
+  {
+    return match ($role) {
+      'ADMIN' => 'Administrador',
+      'COACH' => 'Treinador',
+      'ATHLETE' => 'Atleta',
+    };
+  }
+
   public static function fromString(string $role): self
   {
     return match ($role) {

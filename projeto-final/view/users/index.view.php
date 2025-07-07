@@ -43,7 +43,7 @@
                 <div class="user-info">
                     <h3 class="user-name"><?= $user['name'] ?></h3>
                     <p class="user-email"><?= $user['email'] ?></p>
-                    <span class="badge badge-primary"><?= ucfirst($user['role']) ?></span>
+                    <span class="badge badge-primary"><?= UserRole::fromStringToLabel($user['role']) ?></span>
                 </div>
             </div>
 
@@ -99,6 +99,9 @@
     }
 
     .user-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         transition: all var(--transition-normal);
         border: 1px solid var(--gray-100);
     }

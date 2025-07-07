@@ -12,6 +12,23 @@ class TeamModel
         return $stmt->fetchColumn();
     }
 
+    static function getTotalAthletes(string $teamId): int
+    {
+        global $pdo;
+
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM team_users WHERE team_id = ? AND deleted_at IS NULL");
+        $stmt->execute([$teamId]);
+        return $stmt->fetchColumn();
+    }
+
+    static function getTotalAthletesOutOfTeam(string $teamId): int
+    {
+        $total_athletes_on_team = self::getTotalAthletes($teamId);
+        $total_users = UserModel::getTotalUsers();
+
+        return $total_users - $total_athletes_on_team;
+    }
+
     static function findById(string $id): mixed
     {
         global $pdo;
@@ -27,24 +44,6 @@ class TeamModel
 
         $stmt = $pdo->prepare("SELECT *, (select count(*) from team_users where team_id = teams.id AND deleted_at IS NULL) as total_athletes FROM teams WHERE deleted_at IS NULL ORDER BY created_at DESC LIMIT ? OFFSET ?");
         $stmt->execute([$limit, $offset]);
-        return $stmt->fetchAll();
-    }
-
-    static function listAthletes(string $teamId): array
-    {
-        global $pdo;
-
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = 'ATHLETE' AND deleted_at IS NULL");
-        $stmt->execute([$teamId]);
-        return $stmt->fetchAll();
-    }
-
-    static function listNonAthletes(string $teamId): array
-    {
-        global $pdo;
-
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id NOT IN (SELECT user_id FROM team_users WHERE team_id = ? AND deleted_at IS NULL) AND role = 'ATHLETE' AND deleted_at IS NULL");
-        $stmt->execute([$teamId]);
         return $stmt->fetchAll();
     }
 

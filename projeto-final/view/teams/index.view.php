@@ -98,6 +98,9 @@
     }
 
     .team-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         transition: all var(--transition-normal);
         border: 1px solid var(--gray-100);
     }
