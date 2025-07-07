@@ -55,11 +55,6 @@ $routes = [
       "title" => "Editar equipe",
       "public" => false,
     ],
-    '/ambiente' => [
-      "view" => "environment.view.php",
-      "title" => "Ambiente",
-      "public" => false,
-    ],
     '/treinos' => [
       "view" => "workouts/index.view.php",
       "title" => "Treinos",

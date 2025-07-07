@@ -19,7 +19,7 @@
             </div>
             <div class="metric-content">
                 <h3 class="metric-value"><?= UserModel::getTotalUsers() ?></h3>
-                <p class="metric-label">Usuários Ativos</p>
+                <p class="metric-label">Usuários</p>
             </div>
             <div class="metric-trend positive">
                 <span class="material-symbols-outlined">trending_up</span>

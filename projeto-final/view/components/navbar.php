@@ -36,12 +36,6 @@ $uri = $_SERVER['REQUEST_URI'];
                     <span>Usuários</span>
                 </a>
             </li>
-            <li class="nav-item <?php if (str_starts_with($uri, '/ambiente')) echo 'active' ?>">
-                <a href="/ambiente" class="nav-link">
-                    <span class="material-symbols-outlined">settings</span>
-                    <span>Ambiente</span>
-                </a>
-            </li>
         </ul>
     </div>
 
@@ -49,7 +43,7 @@ $uri = $_SERVER['REQUEST_URI'];
         <div class="user-profile">
             <div class="profile-info">
                 <span class="user-name"><?= $_SESSION['user']['name'] ?? 'Usuário' ?></span>
-                <span class="user-role"><?= $_SESSION['user']['role'] ?? 'Atleta' ?></span>
+                <span class="user-role"><?= UserRole::fromStringToLabel($_SESSION['user']['role']) ?></span>
             </div>
             <div class="profile-avatar">
                 <img src="<?= BASE_URL ?>assets/images/<?= $_SESSION['user']['profile_picture'] ?? 'profile_picture.png'; ?>" alt="Foto de perfil">
@@ -294,19 +288,19 @@ $uri = $_SERVER['REQUEST_URI'];
         .navbar {
             padding: var(--space-3) var(--space-4);
         }
-        
+
         .navbar-left {
             gap: var(--space-4);
         }
-        
+
         .nav-menu {
             gap: 0;
         }
-        
+
         .nav-link span:not(.material-symbols-outlined) {
             display: none;
         }
-        
+
         .nav-link {
             padding: var(--space-3);
         }
@@ -318,26 +312,26 @@ $uri = $_SERVER['REQUEST_URI'];
             gap: var(--space-4);
             padding: var(--space-4);
         }
-        
+
         .navbar-left {
             width: 100%;
             justify-content: space-between;
         }
-        
+
         .nav-menu {
             gap: var(--space-1);
         }
-        
+
         .navbar-right {
             width: 100%;
             justify-content: center;
         }
-        
+
         .user-profile {
             flex: 1;
             justify-content: center;
         }
-        
+
         .profile-info {
             align-items: center;
         }
@@ -348,13 +342,13 @@ $uri = $_SERVER['REQUEST_URI'];
             flex-wrap: wrap;
             justify-content: center;
         }
-        
+
         .user-profile {
             flex-direction: column;
             text-align: center;
             gap: var(--space-2);
         }
-        
+
         .profile-info {
             align-items: center;
         }
