@@ -94,7 +94,7 @@ if (!$team) {
                             </div>
                             <p>Nenhum atleta na equipe</p>
                           </div>';
-                } else if (!empty($search_text)) {
+                } else if (count($athletes) === 0) {
                     echo '<div class="empty-athletes">
                             <div class="empty-icon">
                                 <span class="material-symbols-outlined">person_off</span>
@@ -149,7 +149,7 @@ if (!$team) {
                             </div>
                             <p>Todos os atletas já estão na equipe</p>
                           </div>';
-                } else if (!empty($search_text)) {
+                } else if (count($athletes) === 0) {
                     echo '<div class="empty-athletes">
                             <div class="empty-icon">
                                 <span class="material-symbols-outlined">person_off</span>
