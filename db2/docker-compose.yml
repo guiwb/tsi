@@ -1,0 +1,16 @@
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: "guiwb"
+      POSTGRES_PASSWORD: "guiwb"
+      POSTGRES_DB: "db2"
+    volumes:
+      - ./scripts:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  db_data:
