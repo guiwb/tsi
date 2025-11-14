@@ -223,6 +223,7 @@ include 'conecta.php';
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -253,6 +254,10 @@ include 'conecta.php';
                   <td><?= htmlspecialchars($user['id']); ?></td>
                   <td><?= htmlspecialchars($user['name']); ?></td>
                   <td><?= htmlspecialchars($user['email']); ?></td>
+                  <td>
+                    <a href="processa_delecao.php?id=<?= urlencode($user['id']); ?>" onclick="return confirm('Tem certeza que deseja deletar este usuário?');">Deletar</a>
+                    <a href="edicao.php?id=<?= urlencode($user['id']); ?>">Editar</a>
+                  </td>
                 </tr>
               <?php
               }
